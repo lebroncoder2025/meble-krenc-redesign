@@ -120,7 +120,6 @@ document.querySelectorAll('[data-year]').forEach((element) => {
   element.textContent = new Date().getFullYear();
 });
 
-/* Plain-language privacy preference: no analytics or marketing cookies are active. */
 const privacyKey = 'mk_privacy_choice';
 const cookieBanner = document.querySelector('#cookie-banner');
 const cookieModal = document.querySelector('#cookie-modal');
@@ -171,7 +170,6 @@ cookieModal?.addEventListener('click', (event) => {
   if (event.target === cookieModal) hideCookieModal();
 });
 
-/* Contact form is ready for a real endpoint. Add data-endpoint to #contact-form when backend is connected. */
 const contactForm = document.querySelector('#contact-form');
 const formStatus = document.querySelector('#form-status');
 
@@ -187,7 +185,7 @@ contactForm?.addEventListener('submit', async (event) => {
   const endpoint = String(contactForm.dataset.endpoint || '').trim();
   if (!endpoint) {
     if (formStatus) {
-      formStatus.textContent = 'Formularz jest przygotowany do wysyłki. Uruchomimy ją po podłączeniu serwera obsługującego wiadomości.';
+      formStatus.textContent = 'Wysyłka formularza nie jest jeszcze aktywna. Na razie skontaktuj się telefonicznie lub przez Facebook MebleKrenc.';
     }
     return;
   }
