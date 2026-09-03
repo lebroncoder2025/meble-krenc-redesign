@@ -3,6 +3,30 @@ const header = document.querySelector('[data-header]');
 const menuToggle = document.querySelector('.menu-toggle');
 const siteNav = document.querySelector('.site-nav');
 const menuLabel = menuToggle?.querySelector('.sr-only');
+const FACEBOOK_URL = 'https://www.facebook.com/MebleKrenc/';
+
+/* Keep the company social profile visible on every page without duplicating markup. */
+if (siteNav && !siteNav.querySelector('.social-nav-link')) {
+  const socialLink = document.createElement('a');
+  socialLink.className = 'social-nav-link';
+  socialLink.href = FACEBOOK_URL;
+  socialLink.target = '_blank';
+  socialLink.rel = 'noreferrer';
+  socialLink.innerHTML = 'Facebook <span aria-hidden="true">↗</span>';
+  const cta = siteNav.querySelector('.nav-pill');
+  siteNav.insertBefore(socialLink, cta || null);
+}
+
+document.querySelectorAll('.footer-legal').forEach((footerLinks) => {
+  if (footerLinks.querySelector('.footer-social')) return;
+  const socialLink = document.createElement('a');
+  socialLink.className = 'footer-social';
+  socialLink.href = FACEBOOK_URL;
+  socialLink.target = '_blank';
+  socialLink.rel = 'noreferrer';
+  socialLink.textContent = 'Facebook ↗';
+  footerLinks.prepend(socialLink);
+});
 
 const setMenu = (open) => {
   if (!menuToggle || !siteNav) return;
@@ -77,17 +101,12 @@ const writeCookie = (name, value, days = 180) => {
 const getConsent = () => {
   const raw = readCookie(cookieKey);
   if (!raw) return null;
-  try {
-    return JSON.parse(decodeURIComponent(raw));
-  } catch {
-    return null;
-  }
+  try { return JSON.parse(decodeURIComponent(raw)); }
+  catch { return null; }
 };
 
 const syncAnalyticsInputs = (value) => {
-  analyticsInputs.forEach((input) => {
-    input.checked = Boolean(value);
-  });
+  analyticsInputs.forEach((input) => { input.checked = Boolean(value); });
 };
 
 const hideCookieModal = () => {
@@ -120,38 +139,18 @@ const consent = getConsent();
 if (!consent && cookieBanner) cookieBanner.hidden = false;
 if (consent) syncAnalyticsInputs(consent.analytics);
 
-document.querySelectorAll('[data-cookie-accept]').forEach((button) => {
-  button.addEventListener('click', () => saveConsent(true));
-});
+document.querySelectorAll('[data-cookie-accept]').forEach((button) => button.addEventListener('click', () => saveConsent(true)));
+document.querySelectorAll('[data-cookie-necessary]').forEach((button) => button.addEventListener('click', () => saveConsent(false, 'Wybrano tylko niezbędne cookies.')));
+document.querySelectorAll('[data-cookie-open]').forEach((button) => button.addEventListener('click', (event) => { event.preventDefault(); showCookieModal(button); }));
+document.querySelectorAll('[data-cookie-save]').forEach((button) => button.addEventListener('click', () => {
+  const scope = button.closest('.cookie-panel') || document;
+  const analyticsInput = scope.querySelector('[data-cookie-analytics]');
+  saveConsent(Boolean(analyticsInput?.checked));
+}));
+document.querySelectorAll('[data-cookie-close]').forEach((button) => button.addEventListener('click', hideCookieModal));
+cookieModal?.addEventListener('click', (event) => { if (event.target === cookieModal) hideCookieModal(); });
 
-document.querySelectorAll('[data-cookie-necessary]').forEach((button) => {
-  button.addEventListener('click', () => saveConsent(false, 'Wybrano tylko niezbędne cookies.'));
-});
-
-document.querySelectorAll('[data-cookie-open]').forEach((button) => {
-  button.addEventListener('click', (event) => {
-    event.preventDefault();
-    showCookieModal(button);
-  });
-});
-
-document.querySelectorAll('[data-cookie-save]').forEach((button) => {
-  button.addEventListener('click', () => {
-    const scope = button.closest('.cookie-panel') || document;
-    const analyticsInput = scope.querySelector('[data-cookie-analytics]');
-    saveConsent(Boolean(analyticsInput?.checked));
-  });
-});
-
-document.querySelectorAll('[data-cookie-close]').forEach((button) => {
-  button.addEventListener('click', hideCookieModal);
-});
-
-cookieModal?.addEventListener('click', (event) => {
-  if (event.target === cookieModal) hideCookieModal();
-});
-
-/* Contact form on static GitHub Pages: prepare the message instead of pretending it was sent. */
+/* Static contact form: prepare/copy message instead of pretending it was sent. */
 const contactForm = document.querySelector('#contact-form');
 const formStatus = document.querySelector('#form-status');
 
@@ -160,7 +159,6 @@ const copyText = async (text) => {
     await navigator.clipboard.writeText(text);
     return true;
   }
-
   const textarea = document.createElement('textarea');
   textarea.value = text;
   textarea.setAttribute('readonly', '');
@@ -175,7 +173,6 @@ const copyText = async (text) => {
 
 contactForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
-
   if (!contactForm.checkValidity()) {
     if (formStatus) formStatus.textContent = 'Uzupełnij wymagane pola.';
     contactForm.reportValidity();
@@ -186,29 +183,20 @@ contactForm?.addEventListener('submit', async (event) => {
   const name = String(data.get('name') || '').trim();
   const contact = String(data.get('contact') || '').trim();
   const message = String(data.get('message') || '').trim();
-  const prepared = `Zapytanie ze strony Meble Krenc\n\nImię: ${name}\nKontakt: ${contact}\n\n${message}`;
+  const prepared = `Zapytanie do Meble Krenc\n\nImię: ${name}\nKontakt: ${contact}\n\n${message}`;
 
   try {
     const copied = await copyText(prepared);
-    if (formStatus) {
-      formStatus.textContent = copied
-        ? 'Treść zapytania została skopiowana. Wklej ją w Messengerze lub przekaż podczas rozmowy telefonicznej.'
-        : 'Nie udało się skopiować treści. Skontaktuj się telefonicznie: 663 378 388.';
-    }
+    if (formStatus) formStatus.textContent = copied
+      ? 'Treść została skopiowana. Możesz wkleić ją w Messengerze MebleKrenc lub wykorzystać podczas rozmowy telefonicznej.'
+      : 'Nie udało się skopiować treści. Zadzwoń: 663 378 388.';
   } catch {
-    if (formStatus) formStatus.textContent = 'Nie udało się skopiować treści. Skontaktuj się telefonicznie: 663 378 388.';
+    if (formStatus) formStatus.textContent = 'Nie udało się skopiować treści. Zadzwoń: 663 378 388.';
   }
 });
 
-/* Keyboard handling shared by the navigation and cookie dialog. */
 document.addEventListener('keydown', (event) => {
   if (event.key !== 'Escape') return;
-  if (cookieModal && !cookieModal.hidden) {
-    hideCookieModal();
-    return;
-  }
-  if (menuToggle?.getAttribute('aria-expanded') === 'true') {
-    setMenu(false);
-    menuToggle.focus();
-  }
+  if (cookieModal && !cookieModal.hidden) { hideCookieModal(); return; }
+  if (menuToggle?.getAttribute('aria-expanded') === 'true') { setMenu(false); menuToggle.focus(); }
 });
