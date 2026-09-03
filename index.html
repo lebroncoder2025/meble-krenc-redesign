@@ -3,183 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Meble Krenc — meble na zamówienie, renowacja i tapicerowanie w Łeknie. Projekty dopasowane do wnętrza i potrzeb." />
-    <meta name="theme-color" content="#17241f" />
-    <meta property="og:title" content="Meble Krenc — meble z charakterem" />
-    <meta property="og:description" content="Meble na zamówienie, tapicerowanie i renowacja w Łeknie. Od 2007 roku tworzymy rzeczy, które zostają na dłużej." />
-    <meta property="og:type" content="website" />
+    <meta name="description" content="Meble Krenc — meble tapicerowane na indywidualne zamówienie w Łeknie. Produkcja dla domów, restauracji i hoteli." />
+    <meta name="theme-color" content="#252522" />
     <title>Meble Krenc — meble z charakterem</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="site.css" />
+    <script defer src="site.js"></script>
   </head>
-  <body>
+  <body class="page-home" data-page="home">
     <a class="skip-link" href="#main-content">Przejdź do treści</a>
-
     <header class="site-header" data-header>
       <div class="container nav-wrap">
-        <a class="brand" href="#top" aria-label="Meble Krenc — strona główna">
-          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
-          <span class="brand-text"><strong>meble</strong><em>krenc</em></span>
-        </a>
-
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          <span class="sr-only">Otwórz menu</span>
-          <span></span><span></span>
-        </button>
-
+        <a class="brand" href="index.html" aria-label="Meble Krenc — strona główna"><img class="logo-symbol" src="assets/logo.svg" alt="" /><span class="brand-name">meble<em>krenc</em></span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="sr-only">Otwórz menu</span><span></span><span></span></button>
         <nav class="site-nav" id="site-nav" aria-label="Główna nawigacja">
-          <a href="#oferta">Oferta</a>
-          <a href="#o-nas">O nas</a>
-          <a href="#realizacje">Realizacje</a>
-          <a href="#proces">Jak pracujemy</a>
-          <a href="#kontakt" class="nav-cta">Porozmawiajmy <span aria-hidden="true">↗</span></a>
+          <a href="oferta.html">Oferta</a><a href="o-nas.html">O nas</a><a href="realizacje.html">Portfolio</a><a href="kontakt.html">Kontakt</a><a class="nav-pill" href="kontakt.html">Porozmawiajmy <span>↗</span></a>
         </nav>
       </div>
     </header>
 
     <main id="main-content">
-      <section class="hero section-dark" id="top">
-        <div class="hero-orbit orbit-one" aria-hidden="true"></div>
-        <div class="hero-orbit orbit-two" aria-hidden="true"></div>
-        <div class="container hero-grid">
-          <div class="hero-copy reveal">
-            <p class="eyebrow"><span class="eyebrow-line"></span> Pracownia mebli · Łekno</p>
-            <h1>Meble, które<br /><span>mają znaczenie.</span></h1>
-            <p class="hero-lead">Tworzymy i odnawiamy meble, w których funkcjonalność spotyka się z charakterem. Dla domu, do którego chce się wracać.</p>
-            <div class="hero-actions">
-              <a class="button button-primary" href="#kontakt">Opowiedz o swoim wnętrzu <span aria-hidden="true">↗</span></a>
-              <a class="text-link light-link" href="#realizacje">Zobacz realizacje <span aria-hidden="true">↓</span></a>
-            </div>
-            <div class="hero-note"><span class="dot"></span><span>Rzemiosło i dbałość o detal<br /><strong>od 2007 roku</strong></span></div>
-          </div>
-
-          <div class="hero-visual reveal reveal-delay-1">
-            <div class="hero-image-frame">
-              <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=88" alt="Jasne, spokojne wnętrze z drewnianymi meblami" />
-              <div class="hero-image-shade"></div>
-              <div class="hero-caption"><span>01</span><span>Forma. Materiał. Dom.</span></div>
-            </div>
-            <div class="floating-card"><span class="floating-icon">✦</span><span>Każdy projekt<br /><strong>zaczyna się od rozmowy</strong></span></div>
-          </div>
+      <section class="home-hero">
+        <div class="hero-backdrop" aria-hidden="true"></div><div class="hero-scribble" aria-hidden="true"></div>
+        <div class="container hero-content reveal">
+          <p class="eyebrow">Pracownia mebli · Łekno</p>
+          <h1>Meble, które<br /><em>zostają na dłużej.</em></h1>
+          <p class="hero-description">Produkujemy meble tapicerowane na indywidualne zamówienie. Dla domów, restauracji i hoteli — z uważnością na detal i wygodę.</p>
+          <div class="hero-actions"><a class="button button-primary" href="oferta.html">Zobacz ofertę <span>↗</span></a><a class="text-link" href="realizacje.html">Odkryj portfolio <span>↗</span></a></div>
+          <div class="hero-facts"><div class="hero-fact"><strong>2007</strong><span>początek pracowni</span></div><div class="hero-fact"><strong>Łekno</strong><span>tu powstają nasze meble</span></div></div>
         </div>
-        <div class="scroll-cue" aria-hidden="true"><span>Przewiń</span><i></i></div>
+        <div class="hero-side-label">Meble Krenc · Polska</div>
       </section>
 
-      <section class="intro section-light" id="o-nas">
-        <div class="container intro-grid">
-          <div class="section-kicker reveal"><span>01</span><i></i><span>Kim jesteśmy</span></div>
-          <div class="intro-content reveal reveal-delay-1">
-            <h2>Nie robimy<br /><em>„takich samych”.</em></h2>
-            <div class="intro-columns">
-              <p>Meble Krenc to lokalna pracownia, w której liczy się dobre dopasowanie — do przestrzeni, stylu życia i oczekiwań. Od 2007 roku pomagamy tworzyć rzeczy, które nie są przypadkowe.</p>
-              <p>Od pierwszej rozmowy po ostatni detal pracujemy blisko klienta. Dzięki temu łatwiej znaleźć rozwiązanie, które dobrze wygląda dziś i sprawdza się przez lata.</p>
-            </div>
-            <a class="text-link dark-link" href="#kontakt">Poznajmy się bliżej <span aria-hidden="true">↗</span></a>
-          </div>
+      <section class="section cream">
+        <div class="container intro-split">
+          <div class="section-label reveal">01 / O pracowni</div>
+          <div class="intro-copy reveal reveal-delay-1"><h2 class="display-title">Nie robimy<br /><em>„takich samych”.</em></h2><p>Każdy mebel zaczyna się od rozmowy. Poznajemy potrzeby, przestrzeń i sposób, w jaki ma działać gotowy przedmiot. Potem dobieramy formę, materiał i wykończenie.</p><p>W Meble Krenc tworzymy rozwiązania tapicerowane na indywidualne zamówienie — od pojedynczego mebla po wyposażenie restauracji i hoteli.</p><a class="text-link" href="o-nas.html">Poznaj nas bliżej <span>↗</span></a><div class="mini-note"><span class="mini-note-mark">MK</span><span>Rzemiosło, któremu można zaufać.<br /><strong>Od 2007 roku w Łeknie.</strong></span></div></div>
         </div>
       </section>
 
-      <section class="offer section-paper" id="oferta">
+      <section class="home-offer">
         <div class="container">
-          <div class="section-heading reveal">
-            <div class="section-kicker"><span>02</span><i></i><span>Co możemy zrobić</span></div>
-            <h2>Rozwiązania stworzone<br /><em>dla Twojej przestrzeni.</em></h2>
-            <p>Wybierz kierunek albo opowiedz nam o pomyśle, który dopiero się rodzi. Dopasujemy zakres prac do mebla, wnętrza i budżetu.</p>
-          </div>
-          <div class="offer-grid">
-            <article class="offer-card offer-card-featured reveal">
-              <div class="offer-art art-kitchen"><span class="art-label">na wymiar</span></div>
-              <div class="offer-card-body"><span class="offer-number">01</span><h3>Meble na zamówienie</h3><p>Przemyślane zabudowy i pojedyncze meble dopasowane do konkretnego miejsca.</p><a href="#kontakt" aria-label="Zapytaj o meble na zamówienie">Sprawdź możliwości <span aria-hidden="true">↗</span></a></div>
-            </article>
-            <article class="offer-card reveal reveal-delay-1">
-              <div class="offer-art art-upholstery"><span class="art-label">drugie życie</span></div>
-              <div class="offer-card-body"><span class="offer-number">02</span><h3>Tapicerowanie</h3><p>Nowa tkanina, wygoda i świeży wygląd ulubionego mebla.</p><a href="#kontakt" aria-label="Zapytaj o tapicerowanie">Porozmawiajmy <span aria-hidden="true">↗</span></a></div>
-            </article>
-            <article class="offer-card reveal reveal-delay-2">
-              <div class="offer-art art-restoration"><span class="art-label">z szacunkiem</span></div>
-              <div class="offer-card-body"><span class="offer-number">03</span><h3>Renowacja</h3><p>Odnawiamy to, co ma wartość — z uważnością na materiał i historię.</p><a href="#kontakt" aria-label="Zapytaj o renowację">Zobacz, co możemy uratować <span aria-hidden="true">↗</span></a></div>
-            </article>
-            <article class="offer-card reveal reveal-delay-3">
-              <div class="offer-art art-finish"><span class="art-label">Twój detal</span></div>
-              <div class="offer-card-body"><span class="offer-number">04</span><h3>Personalizacja</h3><p>Malowanie, zmiana wykończenia i detale, które nadają meblom własny ton.</p><a href="#kontakt" aria-label="Zapytaj o personalizację">Dopasujmy szczegóły <span aria-hidden="true">↗</span></a></div>
-            </article>
+          <div class="section-top reveal"><div><div class="section-label">02 / Oferta</div><h2 class="display-title">Wygoda ma<br /><em>wiele form.</em></h2></div><p>Od klasycznej kanapy po nietypowe siedziska do wnętrz komercyjnych. Dobieramy rozwiązanie do miejsca i jego rytmu.</p></div>
+          <div class="service-grid">
+            <article class="service-card reveal"><span class="service-index">01</span><span class="service-icon">⌂</span><h3>Meble do domu</h3><p>Kanapy, fotele, łóżka i siedziska dopasowane do Twojego wnętrza.</p><a href="oferta.html#dom">Poznaj zakres <span>↗</span></a></article>
+            <article class="service-card reveal reveal-delay-1"><span class="service-index">02</span><span class="service-icon">✦</span><h3>Restauracje i hotele</h3><p>Jednostkowe i większe zamówienia dla przestrzeni, które chcą mieć własny charakter.</p><a href="oferta.html#biznes">Zobacz rozwiązania <span>↗</span></a></article>
+            <article class="service-card reveal reveal-delay-2"><span class="service-index">03</span><span class="service-icon">◌</span><h3>Renowacja i zmiana</h3><p>Odświeżenie tapicerki, malowanie, personalizacja i drugie życie ulubionego mebla.</p><a href="oferta.html#renowacja">Sprawdź możliwości <span>↗</span></a></article>
           </div>
         </div>
       </section>
 
-      <section class="manifesto section-dark">
-        <div class="container manifesto-grid">
-          <p class="manifesto-label reveal">Meble Krenc<br />Łekno / Polska</p>
-          <div class="manifesto-copy reveal reveal-delay-1"><span class="quote-mark">“</span><h2>Dobre rzeczy<br />nie wychodzą<br /><em>z mody.</em></h2><p>Wychodzą z pracowni, w której ktoś naprawdę poświęcił im czas.</p></div>
-          <div class="manifesto-stamp reveal reveal-delay-2"><span>MK</span><small>rzemiosło<br />z charakterem</small></div>
-        </div>
+      <section class="photo-callout">
+        <div class="container photo-callout-grid"><div class="photo-frame reveal"><img src="assets/facebook-profile.jpg" alt="Tapicerowana sofa wykonana przez MebleKrenc" /><div class="photo-badge">Opublikowane zdjęcie MebleKrenc<strong>tapicerka na zamówienie</strong></div></div><div class="photo-callout-copy reveal reveal-delay-1"><p class="eyebrow">03 / Prawdziwy detal</p><h2 class="display-title">Najpierw<br /><em>materiał.</em></h2><p>To właśnie w materiale widać charakter mebla. Pracujemy z formą, fakturą i kolorem tak, aby gotowy przedmiot dobrze wyglądał, ale przede wszystkim dobrze służył.</p><a class="button button-light" href="realizacje.html">Zobacz więcej kadrów <span>↗</span></a></div></div>
       </section>
 
-      <section class="process section-light" id="proces">
-        <div class="container">
-          <div class="section-heading process-heading reveal">
-            <div class="section-kicker"><span>03</span><i></i><span>Jak pracujemy</span></div>
-            <h2>Prosto, konkretnie,<br /><em>po Twojemu.</em></h2>
-          </div>
-          <div class="process-grid">
-            <article class="process-step reveal"><span class="step-index">01</span><div class="step-icon">⌁</div><h3>Rozmowa</h3><p>Najpierw słuchamy. Poznajemy potrzeby, wnętrze i pomysł, który chcesz zrealizować.</p></article>
-            <article class="process-step reveal reveal-delay-1"><span class="step-index">02</span><div class="step-icon">□</div><h3>Ustalenia</h3><p>Wspólnie wybieramy kierunek, materiał, kolor i zakres prac. Bez niejasnych obietnic.</p></article>
-            <article class="process-step reveal reveal-delay-2"><span class="step-index">03</span><div class="step-icon">✣</div><h3>Wykonanie</h3><p>Pracujemy uważnie — od przygotowania po wykończenie, z kontrolą każdego detalu.</p></article>
-            <article class="process-step reveal reveal-delay-3"><span class="step-index">04</span><div class="step-icon">↗</div><h3>Efekt</h3><p>Odbierasz mebel, który pasuje do Twojego życia, a nie tylko do zdjęcia w katalogu.</p></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="projects section-paper" id="realizacje">
-        <div class="container">
-          <div class="projects-top reveal">
-            <div><div class="section-kicker"><span>04</span><i></i><span>Wybrane kierunki</span></div><h2>Przedmioty z<br /><em>własną historią.</em></h2></div>
-            <p>Każdy mebel zaczyna się inaczej. Poniżej kilka inspiracji — potraktuj je jak punkt wyjścia do własnego projektu.</p>
-          </div>
-          <div class="filter-bar reveal" role="group" aria-label="Filtruj realizacje">
-            <button class="filter-button is-active" type="button" data-filter="all">Wszystkie</button>
-            <button class="filter-button" type="button" data-filter="na-wymiar">Na wymiar</button>
-            <button class="filter-button" type="button" data-filter="renowacja">Renowacja</button>
-            <button class="filter-button" type="button" data-filter="detal">Detal</button>
-          </div>
-          <div class="project-grid">
-            <article class="project-card project-large reveal" data-category="na-wymiar">
-              <button class="project-button" type="button" data-project="kuchnia"><img src="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?auto=format&fit=crop&w=1400&q=85" alt="Minimalistyczna kuchnia z drewnianą wyspą" /><span class="project-overlay"><span>01 / Na wymiar</span><strong>Ciepło<br /><em>codzienności</em></strong><i>↗</i></span></button>
-            </article>
-            <article class="project-card reveal reveal-delay-1" data-category="renowacja">
-              <button class="project-button" type="button" data-project="krzeslo"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=85" alt="Drewniane krzesło w jasnym wnętrzu" /><span class="project-overlay"><span>02 / Renowacja</span><strong>Drugie<br /><em>życie</em></strong><i>↗</i></span></button>
-            </article>
-            <article class="project-card reveal reveal-delay-2" data-category="detal">
-              <button class="project-button" type="button" data-project="detal"><img src="https://images.unsplash.com/photo-1549497538-303791108f95?auto=format&fit=crop&w=900&q=85" alt="Detal drewnianego mebla i naturalnego materiału" /><span class="project-overlay"><span>03 / Detal</span><strong>Materiał<br /><em>mówi sam</em></strong><i>↗</i></span></button>
-            </article>
-            <article class="project-card project-wide reveal reveal-delay-1" data-category="na-wymiar">
-              <button class="project-button" type="button" data-project="strefa"><img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1400&q=85" alt="Nowoczesna strefa wypoczynku z zabudową meblową" /><span class="project-overlay"><span>04 / Na wymiar</span><strong>Spokojna<br /><em>przestrzeń</em></strong><i>↗</i></span></button>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="contact section-dark" id="kontakt">
-        <div class="contact-grain" aria-hidden="true"></div>
-        <div class="container contact-grid">
-          <div class="contact-copy reveal"><div class="section-kicker light-kicker"><span>05</span><i></i><span>Zacznijmy od rozmowy</span></div><h2>Masz mebel,<br />pomysł albo<br /><em>pytanie?</em></h2><p>Napisz lub zadzwoń. Opowiedz, czego potrzebujesz — wrócimy z konkretną odpowiedzią.</p><div class="contact-details"><a href="tel:+48663378388"><span>Telefon</span><strong>663 378 388</strong></a><a href="https://www.google.com/maps/search/?api=1&query=Pa%C5%82ucka+5%2C+62-105+%C5%81ekno" target="_blank" rel="noreferrer"><span>Pracownia</span><strong>Pałucka 5, 62-105 Łekno <small>↗</small></strong></a></div></div>
-          <div class="contact-form-wrap reveal reveal-delay-1"><form class="contact-form" id="contact-form" novalidate><div class="form-intro"><span>Opisz swój projekt</span><span>odpiszemy możliwie szybko</span></div><label>Imię <input type="text" name="name" autocomplete="name" placeholder="Jak masz na imię?" required /></label><label>Telefon lub e-mail <input type="text" name="contact" autocomplete="email" placeholder="Jak możemy się skontaktować?" required /></label><label>Wiadomość <textarea name="message" rows="3" placeholder="Czego potrzebujesz?" required></textarea></label><button class="button button-light" type="submit">Wyślij wiadomość <span aria-hidden="true">↗</span></button><p class="form-status" id="form-status" role="status" aria-live="polite"></p></form></div>
-        </div>
-      </section>
-
-      <section class="faq section-light">
-        <div class="container faq-grid"><div class="reveal"><div class="section-kicker"><span>06</span><i></i><span>Najczęstsze pytania</span></div><h2>Zanim<br /><em>zaczniemy.</em></h2><p class="faq-intro">Masz inne pytanie? Zadzwoń — chętnie odpowiemy i podpowiemy najlepsze rozwiązanie.</p></div><div class="faq-list reveal reveal-delay-1"><details open><summary>Czy wykonujecie meble na konkretny wymiar?<span>+</span></summary><p>Tak. Każdy projekt zaczynamy od poznania przestrzeni i potrzeb, żeby rozwiązanie było dopasowane, wygodne i proporcjonalne.</p></details><details><summary>Czy można odnowić mój własny mebel?<span>+</span></summary><p>Tak — zakres renowacji i możliwość wykonania prac ustalamy indywidualnie po obejrzeniu mebla i ocenie jego stanu.</p></details><details><summary>Jak wygląda pierwsza wycena?<span>+</span></summary><p>Wystarczy krótka wiadomość, telefon lub zdjęcia mebla i wnętrza. Na tej podstawie ustalimy kolejne kroki oraz zakres prac.</p></details><details><summary>Czy zajmujecie się także montażem?<span>+</span></summary><p>Tak, montaż i demontaż mogą być częścią ustalonego zakresu realizacji.</p></details></div></div>
-      </section>
+      <section class="quote-section"><div class="container reveal"><blockquote>„Dobre rzeczy nie wychodzą z mody.<br /><em>Wychodzą z dobrej pracowni.”</em></blockquote><cite>Meble Krenc / Łekno</cite></div></section>
     </main>
 
-    <footer class="site-footer section-dark">
-      <div class="container footer-top"><a class="brand footer-brand" href="#top" aria-label="Meble Krenc — strona główna"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-text"><strong>meble</strong><em>krenc</em></span></a><p>Pracownia mebli z charakterem.<br />Łekno · od 2007 roku</p><a class="footer-arrow" href="#top" aria-label="Wróć na górę">↑</a></div>
-      <div class="container footer-bottom"><span>© <span data-year></span> Meble Krenc s.c. Maria Krenc, Michał Krenc</span><span>Pałucka 5 · 62-105 Łekno</span><a href="https://www.meblekrenc.pl/" target="_blank" rel="noreferrer">meblekrenc.pl ↗</a></div>
-    </footer>
-
-    <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" data-close-dialog aria-label="Zamknij">×</button><div class="dialog-image"><img id="dialog-image" src="" alt="" /></div><div class="dialog-copy"><span id="dialog-label" class="eyebrow"></span><h2 id="dialog-title"></h2><p id="dialog-text"></p><a class="button button-primary" href="#kontakt" data-close-dialog>Zapytaj o podobny projekt <span aria-hidden="true">↗</span></a></div></dialog>
+    <footer class="site-footer"><div class="container footer-main"><a class="brand footer-brand" href="index.html"><img class="logo-symbol" src="assets/logo.svg" alt="" /><span class="brand-name">meble<em>krenc</em></span></a><p>Pracownia mebli tapicerowanych<br />Łekno · od 2007 roku</p><a class="footer-to-top" href="#main-content" aria-label="Wróć na górę">↑</a></div><div class="container footer-bottom"><span>© <span data-year></span> Meble Krenc s.c. Maria Krenc, Michał Krenc</span><span class="footer-legal"><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="cookies.html">Cookies</a><a href="ustawienia-cookies.html" data-cookie-open>Ustawienia cookies</a></span></div></footer>
+    <div class="cookie-banner" id="cookie-banner" hidden><div class="cookie-copy"><strong>Twoja prywatność</strong><p>Używamy wyłącznie niezbędnego pliku do zapamiętania Twoich ustawień cookies. Szczegóły znajdziesz w <a href="cookies.html">polityce cookies</a>.</p></div><div class="cookie-actions"><button type="button" data-cookie-necessary>Tylko niezbędne</button><button class="cookie-accept" type="button" data-cookie-accept>Akceptuję wszystkie</button><a href="ustawienia-cookies.html">Ustawienia</a></div></div>
+    <div class="cookie-modal" id="cookie-modal" hidden><div class="cookie-panel" role="dialog" aria-modal="true" aria-labelledby="cookie-title"><h2 id="cookie-title">Ustawienia cookies</h2><p>Wybierz, na co wyrażasz zgodę. Strona nie korzysta obecnie z narzędzi analitycznych ani reklamowych.</p><label class="cookie-option"><span><strong>Niezbędne</strong><p>Zapamiętanie ustawień zgody. Zawsze aktywne.</p></span><input type="checkbox" checked disabled /></label><label class="cookie-option"><span><strong>Analityczne</strong><p>Obecnie nie są używane na tej stronie.</p></span><input type="checkbox" data-cookie-analytics /></label><div class="cookie-panel-actions"><button class="button button-outline" type="button" data-cookie-close>Anuluj</button><button class="button button-primary" type="button" data-cookie-save>Zapisz ustawienia</button></div></div></div>
   </body>
 </html>

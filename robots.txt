@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lebroncoder2025.github.io/meble-krenc-redesign/sitemap.xml
