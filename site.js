@@ -5,42 +5,77 @@ const siteNav = document.querySelector('.site-nav');
 const menuLabel = menuToggle?.querySelector('.sr-only');
 const FACEBOOK_URL = 'https://www.facebook.com/MebleKrenc/';
 
-/* Load the final shared visual system on pages that do not declare it in <head>. */
-if (!document.querySelector('link[href="site-v3.css"]')) {
-  const visualSystem = document.createElement('link');
-  visualSystem.rel = 'stylesheet';
-  visualSystem.href = 'site-v3.css';
-  document.head.appendChild(visualSystem);
-}
+const ensureStylesheet = (href) => {
+  if (document.querySelector(`link[href="${href}"]`)) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  document.head.appendChild(link);
+};
+ensureStylesheet('site-v3.css');
+ensureStylesheet('site-v4.css');
 
-/* Use the dedicated mark as favicon everywhere. */
 const favicon = document.querySelector('link[rel="icon"]') || document.createElement('link');
 favicon.rel = 'icon';
 favicon.type = 'image/svg+xml';
 favicon.href = 'assets/favicon.svg';
 if (!favicon.parentNode) document.head.appendChild(favicon);
 
-/* Keep the real company social profile visible on every page. */
+const icons = {
+  facebook: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.7 21v-8h2.8l.5-3.2h-3.3V7.7c0-.9.3-1.6 1.7-1.6h1.8V3.2c-.3 0-1.4-.2-2.6-.2-2.6 0-4.4 1.6-4.4 4.6v2.2H7.3V13h2.9v8h3.5Z"/></svg>`,
+  external: `<svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>`,
+  right: `<svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>`
+};
+
 if (siteNav && !siteNav.querySelector('.social-nav-link')) {
   const socialLink = document.createElement('a');
   socialLink.className = 'social-nav-link';
   socialLink.href = FACEBOOK_URL;
   socialLink.target = '_blank';
   socialLink.rel = 'noreferrer';
-  socialLink.innerHTML = '<span class="fb-dot" aria-hidden="true">f</span> Facebook';
+  socialLink.setAttribute('aria-label', 'Facebook Meble Krenc');
   const cta = siteNav.querySelector('.nav-pill');
   siteNav.insertBefore(socialLink, cta || null);
 }
+document.querySelectorAll('.social-nav-link').forEach((link) => {
+  link.href = FACEBOOK_URL;
+  link.target = '_blank';
+  link.rel = 'noreferrer';
+  link.setAttribute('aria-label', 'Facebook Meble Krenc');
+  link.innerHTML = icons.facebook;
+});
 
 document.querySelectorAll('.footer-legal').forEach((footerLinks) => {
-  if (footerLinks.querySelector('.footer-social')) return;
-  const socialLink = document.createElement('a');
-  socialLink.className = 'footer-social';
+  let socialLink = footerLinks.querySelector('.footer-social');
+  if (!socialLink) {
+    socialLink = document.createElement('a');
+    socialLink.className = 'footer-social';
+    footerLinks.prepend(socialLink);
+  }
   socialLink.href = FACEBOOK_URL;
   socialLink.target = '_blank';
   socialLink.rel = 'noreferrer';
-  socialLink.textContent = 'Facebook ↗';
-  footerLinks.prepend(socialLink);
+  socialLink.setAttribute('aria-label', 'Facebook Meble Krenc');
+  socialLink.innerHTML = icons.facebook;
+});
+
+document.querySelectorAll('.footer-to-top').forEach((element) => element.remove());
+
+document.querySelectorAll('.nav-pill span, .button span, .mk5-btn span, .text-link span').forEach((span) => {
+  span.innerHTML = icons.external;
+});
+document.querySelectorAll('.mk5-card a span:last-child').forEach((span) => {
+  span.innerHTML = icons.right;
+});
+document.querySelectorAll('.map-card > a').forEach((link) => {
+  link.innerHTML = icons.external;
+});
+document.querySelectorAll('.contact-social a > span:last-child').forEach((span) => {
+  span.innerHTML = icons.external;
+});
+document.querySelectorAll('.mk5-fb').forEach((link) => {
+  link.setAttribute('aria-label', 'Facebook Meble Krenc');
+  link.innerHTML = icons.facebook;
 });
 
 const setMenu = (open) => {
@@ -50,15 +85,8 @@ const setMenu = (open) => {
   body.classList.toggle('menu-open', open);
   if (menuLabel) menuLabel.textContent = open ? 'Zamknij menu' : 'Otwórz menu';
 };
-
-menuToggle?.addEventListener('click', () => {
-  setMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
-});
-
-siteNav?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => setMenu(false));
-});
-
+menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+siteNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
 window.addEventListener('resize', () => {
   if (window.innerWidth > 720) setMenu(false);
 });
@@ -82,48 +110,33 @@ const revealObserver = 'IntersectionObserver' in window
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -30px' })
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px' })
   : null;
-
 document.querySelectorAll('.reveal').forEach((element) => {
   if (revealObserver) revealObserver.observe(element);
   else element.classList.add('is-visible');
 });
-
 document.querySelectorAll('[data-year]').forEach((element) => {
   element.textContent = new Date().getFullYear();
 });
 
-/* Cookies */
-const cookieKey = 'mk_cookie_consent';
+/* Plain-language privacy preference: no analytics or marketing cookies are active. */
+const privacyKey = 'mk_privacy_choice';
 const cookieBanner = document.querySelector('#cookie-banner');
 const cookieModal = document.querySelector('#cookie-modal');
-const analyticsInputs = [...document.querySelectorAll('[data-cookie-analytics]')];
-const cookieSettingsStatus = document.querySelector('[data-cookie-settings-status]');
 let cookieReturnFocus = null;
 
-const readCookie = (name) => {
-  const prefix = `${name}=`;
-  const row = document.cookie.split('; ').find((item) => item.startsWith(prefix));
-  return row ? row.slice(prefix.length) : null;
-};
+document.querySelectorAll('[data-cookie-analytics]').forEach((input) => input.closest('.cookie-option')?.remove());
+document.querySelectorAll('[data-cookie-necessary]').forEach((button) => button.remove());
+document.querySelectorAll('[data-cookie-accept]').forEach((button) => { button.textContent = 'Rozumiem'; });
+document.querySelectorAll('.cookie-modal .cookie-panel > p').forEach((p) => {
+  p.textContent = 'Strona nie używa obecnie cookies analitycznych ani reklamowych.';
+});
 
-const writeCookie = (name, value, days = 180) => {
-  const expires = new Date(Date.now() + days * 864e5).toUTCString();
-  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+const readPreference = () => {
+  const row = document.cookie.split('; ').find((item) => item.startsWith(`${privacyKey}=`));
+  return row ? row.slice(privacyKey.length + 1) : null;
 };
-
-const getConsent = () => {
-  const raw = readCookie(cookieKey);
-  if (!raw) return null;
-  try { return JSON.parse(decodeURIComponent(raw)); }
-  catch { return null; }
-};
-
-const syncAnalyticsInputs = (value) => {
-  analyticsInputs.forEach((input) => { input.checked = Boolean(value); });
-};
-
 const hideCookieModal = () => {
   if (!cookieModal) return;
   cookieModal.hidden = true;
@@ -131,87 +144,85 @@ const hideCookieModal = () => {
   cookieReturnFocus?.focus?.();
   cookieReturnFocus = null;
 };
-
+const savePreference = () => {
+  const expires = new Date(Date.now() + 180 * 864e5).toUTCString();
+  document.cookie = `${privacyKey}=ok; expires=${expires}; path=/; SameSite=Lax`;
+  if (cookieBanner) cookieBanner.hidden = true;
+  hideCookieModal();
+};
 const showCookieModal = (trigger) => {
   if (!cookieModal) return;
-  const consent = getConsent();
-  syncAnalyticsInputs(consent?.analytics);
   cookieReturnFocus = trigger || document.activeElement;
   cookieModal.hidden = false;
   body.classList.add('modal-open');
-  cookieModal.querySelector('button, input:not([disabled]), a')?.focus();
+  cookieModal.querySelector('button, a')?.focus();
 };
 
-const saveConsent = (analytics, message = 'Ustawienia cookies zostały zapisane.') => {
-  writeCookie(cookieKey, JSON.stringify({ necessary: true, analytics: Boolean(analytics) }));
-  syncAnalyticsInputs(analytics);
-  if (cookieBanner) cookieBanner.hidden = true;
-  hideCookieModal();
-  if (cookieSettingsStatus) cookieSettingsStatus.textContent = message;
-};
-
-const consent = getConsent();
-if (!consent && cookieBanner) cookieBanner.hidden = false;
-if (consent) syncAnalyticsInputs(consent.analytics);
-
-document.querySelectorAll('[data-cookie-accept]').forEach((button) => button.addEventListener('click', () => saveConsent(true)));
-document.querySelectorAll('[data-cookie-necessary]').forEach((button) => button.addEventListener('click', () => saveConsent(false, 'Wybrano tylko niezbędne cookies.')));
-document.querySelectorAll('[data-cookie-open]').forEach((button) => button.addEventListener('click', (event) => { event.preventDefault(); showCookieModal(button); }));
-document.querySelectorAll('[data-cookie-save]').forEach((button) => button.addEventListener('click', () => {
-  const scope = button.closest('.cookie-panel') || document;
-  const analyticsInput = scope.querySelector('[data-cookie-analytics]');
-  saveConsent(Boolean(analyticsInput?.checked));
-}));
+if (!readPreference() && cookieBanner) cookieBanner.hidden = false;
+document.querySelectorAll('[data-cookie-accept], [data-cookie-save]').forEach((button) => button.addEventListener('click', savePreference));
+document.querySelectorAll('[data-cookie-open]').forEach((button) => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    showCookieModal(button);
+  });
+});
 document.querySelectorAll('[data-cookie-close]').forEach((button) => button.addEventListener('click', hideCookieModal));
-cookieModal?.addEventListener('click', (event) => { if (event.target === cookieModal) hideCookieModal(); });
+cookieModal?.addEventListener('click', (event) => {
+  if (event.target === cookieModal) hideCookieModal();
+});
 
-/* Static contact form: prepare/copy message instead of pretending it was sent. */
+/* Contact form is ready for a real endpoint. Add data-endpoint to #contact-form when backend is connected. */
 const contactForm = document.querySelector('#contact-form');
 const formStatus = document.querySelector('#form-status');
 
-const copyText = async (text) => {
-  if (navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(text);
-    return true;
-  }
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.setAttribute('readonly', '');
-  textarea.style.position = 'fixed';
-  textarea.style.opacity = '0';
-  body.appendChild(textarea);
-  textarea.select();
-  const copied = document.execCommand('copy');
-  textarea.remove();
-  return copied;
-};
-
 contactForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
+
   if (!contactForm.checkValidity()) {
     if (formStatus) formStatus.textContent = 'Uzupełnij wymagane pola.';
     contactForm.reportValidity();
     return;
   }
 
-  const data = new FormData(contactForm);
-  const name = String(data.get('name') || '').trim();
-  const contact = String(data.get('contact') || '').trim();
-  const message = String(data.get('message') || '').trim();
-  const prepared = `Zapytanie do Meble Krenc\n\nImię: ${name}\nKontakt: ${contact}\n\n${message}`;
+  const endpoint = String(contactForm.dataset.endpoint || '').trim();
+  if (!endpoint) {
+    if (formStatus) {
+      formStatus.textContent = 'Formularz jest przygotowany do wysyłki. Uruchomimy ją po podłączeniu serwera obsługującego wiadomości.';
+    }
+    return;
+  }
+
+  const submit = contactForm.querySelector('button[type="submit"]');
+  const data = Object.fromEntries(new FormData(contactForm).entries());
 
   try {
-    const copied = await copyText(prepared);
-    if (formStatus) formStatus.textContent = copied
-      ? 'Treść została skopiowana. Możesz wkleić ją w Messengerze MebleKrenc lub wykorzystać podczas rozmowy telefonicznej.'
-      : 'Nie udało się skopiować treści. Zadzwoń: 663 378 388.';
+    submit?.setAttribute('disabled', '');
+    if (formStatus) formStatus.textContent = 'Wysyłanie…';
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    contactForm.reset();
+    if (formStatus) formStatus.textContent = 'Dziękujemy. Wiadomość została wysłana.';
   } catch {
-    if (formStatus) formStatus.textContent = 'Nie udało się skopiować treści. Zadzwoń: 663 378 388.';
+    if (formStatus) formStatus.textContent = 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub zadzwoń: 663 378 388.';
+  } finally {
+    submit?.removeAttribute('disabled');
   }
 });
 
 document.addEventListener('keydown', (event) => {
   if (event.key !== 'Escape') return;
-  if (cookieModal && !cookieModal.hidden) { hideCookieModal(); return; }
-  if (menuToggle?.getAttribute('aria-expanded') === 'true') { setMenu(false); menuToggle.focus(); }
+  if (cookieModal && !cookieModal.hidden) {
+    hideCookieModal();
+    return;
+  }
+  if (menuToggle?.getAttribute('aria-expanded') === 'true') {
+    setMenu(false);
+    menuToggle.focus();
+  }
 });
