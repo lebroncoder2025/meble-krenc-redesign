@@ -1,15 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 88" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 84" role="img" aria-labelledby="title desc">
   <title id="title">Meble Krenc</title>
-  <desc id="desc">Logotyp Meble Krenc z geometrycznym znakiem K</desc>
-  <g fill="none" stroke-linecap="square" stroke-linejoin="miter">
-    <path d="M18 14V74" stroke="#c78f55" stroke-width="6"/>
-    <path d="M35 14V74" stroke="#171815" stroke-width="7"/>
-    <path d="M35 44L67 14" stroke="#171815" stroke-width="7"/>
-    <path d="M35 44L69 74" stroke="#171815" stroke-width="7"/>
-    <path d="M45 43L72 18" stroke="#c78f55" stroke-width="2.5" opacity=".9"/>
+  <desc id="desc">Autorski znak K oraz logotyp Meble Krenc</desc>
+  <g transform="translate(2 8)">
+    <rect x="0" y="2" width="8" height="56" rx="4" fill="#C7905C"/>
+    <path d="M15 2h9v23L44 2h13L34 30l25 28H46L24 34v24h-9V2Z" fill="#181816"/>
+    <path d="M37 31 56 8" fill="none" stroke="#C7905C" stroke-width="3" stroke-linecap="round" opacity=".9"/>
   </g>
-  <g fill="#171815" font-family="Arial, Helvetica, sans-serif">
-    <text x="92" y="43" font-size="28" font-weight="700" letter-spacing="1.4">MEBLE KRENC</text>
-    <text x="94" y="63" font-size="8.5" font-weight="600" letter-spacing="2.8">PRACOWNIA MEBLI · ŁEKNO</text>
+  <g fill="#181816" font-family="Arial, Helvetica, sans-serif">
+    <text x="82" y="38" font-size="24" font-weight="700" letter-spacing="2.5">MEBLE KRENC</text>
+    <text x="84" y="57" font-size="8.5" font-weight="600" letter-spacing="2">MEBLE TAPICEROWANE · ŁEKNO</text>
   </g>
 </svg>
