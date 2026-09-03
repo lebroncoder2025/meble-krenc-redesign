@@ -1,32 +1,49 @@
+const body = document.body;
 const header = document.querySelector('[data-header]');
 const menuToggle = document.querySelector('.menu-toggle');
 const siteNav = document.querySelector('.site-nav');
+const menuLabel = menuToggle?.querySelector('.sr-only');
 
 const setMenu = (open) => {
-  menuToggle?.setAttribute('aria-expanded', String(open));
-  siteNav?.classList.toggle('is-open', open);
-  document.body.classList.toggle('menu-open', open);
+  if (!menuToggle || !siteNav) return;
+  menuToggle.setAttribute('aria-expanded', String(open));
+  siteNav.classList.toggle('is-open', open);
+  body.classList.toggle('menu-open', open);
+  if (menuLabel) menuLabel.textContent = open ? 'Zamknij menu' : 'Otwórz menu';
 };
 
 menuToggle?.addEventListener('click', () => {
   setMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
 });
 
-siteNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+siteNav?.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', () => setMenu(false));
+});
 
-const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 12);
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 720) setMenu(false);
+});
+
+let headerTicking = false;
+const updateHeader = () => {
+  header?.classList.toggle('is-scrolled', window.scrollY > 14);
+  headerTicking = false;
+};
 updateHeader();
-window.addEventListener('scroll', updateHeader, { passive: true });
+window.addEventListener('scroll', () => {
+  if (headerTicking) return;
+  headerTicking = true;
+  requestAnimationFrame(updateHeader);
+}, { passive: true });
 
 const revealObserver = 'IntersectionObserver' in window
   ? new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       });
-    }, { threshold: 0.12 })
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px' })
   : null;
 
 document.querySelectorAll('.reveal').forEach((element) => {
@@ -38,51 +55,159 @@ document.querySelectorAll('[data-year]').forEach((element) => {
   element.textContent = new Date().getFullYear();
 });
 
+/* Cookies */
 const cookieKey = 'mk_cookie_consent';
 const cookieBanner = document.querySelector('#cookie-banner');
 const cookieModal = document.querySelector('#cookie-modal');
-const analyticsInput = document.querySelector('[data-cookie-analytics]');
+const analyticsInputs = [...document.querySelectorAll('[data-cookie-analytics]')];
+const cookieSettingsStatus = document.querySelector('[data-cookie-settings-status]');
+let cookieReturnFocus = null;
 
-const readCookie = (name) => document.cookie.split('; ').find((row) => row.startsWith(`${name}=`))?.split('=')[1];
+const readCookie = (name) => {
+  const prefix = `${name}=`;
+  const row = document.cookie.split('; ').find((item) => item.startsWith(prefix));
+  return row ? row.slice(prefix.length) : null;
+};
+
 const writeCookie = (name, value, days = 180) => {
   const expires = new Date(Date.now() + days * 864e5).toUTCString();
   document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
 };
+
 const getConsent = () => {
-  try { return JSON.parse(decodeURIComponent(readCookie(cookieKey) || '')); } catch { return null; }
+  const raw = readCookie(cookieKey);
+  if (!raw) return null;
+  try {
+    return JSON.parse(decodeURIComponent(raw));
+  } catch {
+    return null;
+  }
 };
-const showCookieModal = () => {
+
+const syncAnalyticsInputs = (value) => {
+  analyticsInputs.forEach((input) => {
+    input.checked = Boolean(value);
+  });
+};
+
+const hideCookieModal = () => {
+  if (!cookieModal) return;
+  cookieModal.hidden = true;
+  body.classList.remove('modal-open');
+  cookieReturnFocus?.focus?.();
+  cookieReturnFocus = null;
+};
+
+const showCookieModal = (trigger) => {
+  if (!cookieModal) return;
   const consent = getConsent();
-  if (analyticsInput && consent) analyticsInput.checked = Boolean(consent.analytics);
-  if (cookieModal) cookieModal.hidden = false;
+  syncAnalyticsInputs(consent?.analytics);
+  cookieReturnFocus = trigger || document.activeElement;
+  cookieModal.hidden = false;
+  body.classList.add('modal-open');
+  cookieModal.querySelector('button, input:not([disabled]), a')?.focus();
 };
-const hideCookieModal = () => { if (cookieModal) cookieModal.hidden = true; };
-const saveConsent = (analytics) => {
+
+const saveConsent = (analytics, message = 'Ustawienia cookies zostały zapisane.') => {
   writeCookie(cookieKey, JSON.stringify({ necessary: true, analytics: Boolean(analytics) }));
+  syncAnalyticsInputs(analytics);
   if (cookieBanner) cookieBanner.hidden = true;
   hideCookieModal();
+  if (cookieSettingsStatus) cookieSettingsStatus.textContent = message;
 };
 
-if (!getConsent() && cookieBanner) cookieBanner.hidden = false;
-document.querySelectorAll('[data-cookie-accept]').forEach((button) => button.addEventListener('click', () => saveConsent(true)));
-document.querySelectorAll('[data-cookie-necessary]').forEach((button) => button.addEventListener('click', () => saveConsent(false)));
-document.querySelectorAll('[data-cookie-open]').forEach((button) => button.addEventListener('click', (event) => {
-  event.preventDefault();
-  showCookieModal();
-}));
-document.querySelectorAll('[data-cookie-save]').forEach((button) => button.addEventListener('click', () => saveConsent(analyticsInput?.checked)));
-document.querySelectorAll('[data-cookie-close]').forEach((button) => button.addEventListener('click', hideCookieModal));
-cookieModal?.addEventListener('click', (event) => { if (event.target === cookieModal) hideCookieModal(); });
+const consent = getConsent();
+if (!consent && cookieBanner) cookieBanner.hidden = false;
+if (consent) syncAnalyticsInputs(consent.analytics);
 
+document.querySelectorAll('[data-cookie-accept]').forEach((button) => {
+  button.addEventListener('click', () => saveConsent(true));
+});
+
+document.querySelectorAll('[data-cookie-necessary]').forEach((button) => {
+  button.addEventListener('click', () => saveConsent(false, 'Wybrano tylko niezbędne cookies.'));
+});
+
+document.querySelectorAll('[data-cookie-open]').forEach((button) => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    showCookieModal(button);
+  });
+});
+
+document.querySelectorAll('[data-cookie-save]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const checked = analyticsInputs.some((input) => input.checked);
+    saveConsent(checked);
+  });
+});
+
+document.querySelectorAll('[data-cookie-close]').forEach((button) => {
+  button.addEventListener('click', hideCookieModal);
+});
+
+cookieModal?.addEventListener('click', (event) => {
+  if (event.target === cookieModal) hideCookieModal();
+});
+
+/* Contact form on static GitHub Pages: prepare the message instead of pretending it was sent. */
 const contactForm = document.querySelector('#contact-form');
 const formStatus = document.querySelector('#form-status');
-contactForm?.addEventListener('submit', (event) => {
+
+const copyText = async (text) => {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  body.appendChild(textarea);
+  textarea.select();
+  const copied = document.execCommand('copy');
+  textarea.remove();
+  return copied;
+};
+
+contactForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
+
   if (!contactForm.checkValidity()) {
-    formStatus.textContent = 'Uzupełnij proszę wszystkie pola.';
+    if (formStatus) formStatus.textContent = 'Uzupełnij wymagane pola.';
     contactForm.reportValidity();
     return;
   }
-  formStatus.textContent = 'Dziękujemy. Oddzwonimy lub odpowiemy na podany kontakt.';
-  contactForm.reset();
+
+  const data = new FormData(contactForm);
+  const name = String(data.get('name') || '').trim();
+  const contact = String(data.get('contact') || '').trim();
+  const message = String(data.get('message') || '').trim();
+  const prepared = `Zapytanie ze strony Meble Krenc\n\nImię: ${name}\nKontakt: ${contact}\n\n${message}`;
+
+  try {
+    const copied = await copyText(prepared);
+    if (formStatus) {
+      formStatus.textContent = copied
+        ? 'Treść zapytania została skopiowana. Wklej ją w Messengerze lub przekaż podczas rozmowy telefonicznej.'
+        : 'Nie udało się skopiować treści. Skontaktuj się telefonicznie: 663 378 388.';
+    }
+  } catch {
+    if (formStatus) formStatus.textContent = 'Nie udało się skopiować treści. Skontaktuj się telefonicznie: 663 378 388.';
+  }
+});
+
+/* Keyboard handling shared by the navigation and cookie dialog. */
+document.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape') return;
+  if (cookieModal && !cookieModal.hidden) {
+    hideCookieModal();
+    return;
+  }
+  if (menuToggle?.getAttribute('aria-expanded') === 'true') {
+    setMenu(false);
+    menuToggle.focus();
+  }
 });
