@@ -16,9 +16,72 @@
     .site-nav a.social-nav-link svg{width:11px!important;height:20px!important;display:block!important;fill:currentColor!important}
     .footer-social{color:#fff!important;background:#1877f2!important;border:0!important}
     .footer-social svg{width:10px!important;height:18px!important;display:block!important;fill:currentColor!important}
-    @media(max-width:760px){.site-nav a.social-nav-link{width:46px!important;height:46px!important;margin:16px 0 4px!important;border:0!important;border-bottom:0!important}.site-nav a.social-nav-link svg{width:12px!important;height:21px!important}}
+
+    .offer-page .section-top{align-items:end}
+    .offer-page .section-top .display-title{max-width:760px;line-height:1.04!important}
+    .offer-page .section-top>p{line-height:1.8}
+    .offer-page .service-grid{gap:18px!important;border:0!important}
+    .offer-page .service-card,
+    .offer-page .service-card:nth-child(2),
+    .offer-page .service-card:nth-child(3){
+      min-height:350px!important;
+      padding:28px!important;
+      border:1px solid var(--mk4-line)!important;
+      border-radius:22px!important;
+      background:var(--mk4-card)!important;
+      box-shadow:none!important;
+    }
+    .offer-page .service-card h3{margin:58px 0 16px!important;font-size:clamp(36px,4vw,48px)!important;line-height:1.02!important}
+    .offer-page .service-card p{max-width:none!important;font-size:14px!important;line-height:1.75!important}
+    .offer-page .service-card a{margin-top:auto!important;padding-top:22px!important;gap:18px!important}
+    .offer-page .service-arrow{
+      width:34px;height:34px;display:grid;place-items:center;flex:0 0 34px;
+      color:var(--mk4-ink)!important;border:1px solid var(--mk4-line);border-radius:50%;background:transparent;
+    }
+    .offer-page .service-arrow svg{width:16px;height:16px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .offer-page .service-card a:hover .service-arrow{color:#fff!important;background:var(--mk4-ink);border-color:var(--mk4-ink)}
+
+    .offer-page .service-detail{padding:104px 0!important}
+    .offer-page .detail-aside h2{line-height:1.05!important}
+
+    .offer-page .home-cta{
+      padding:96px 0!important;
+      color:var(--mk4-ink)!important;
+      background:var(--mk4-cream-2)!important;
+      border-top:1px solid var(--mk4-line);
+    }
+    .offer-page .home-cta-grid{grid-template-columns:1.05fr .95fr!important;gap:72px!important;align-items:center!important}
+    .offer-page .home-cta h2{
+      max-width:720px;margin:0!important;color:var(--mk4-ink)!important;
+      font-size:clamp(50px,5.8vw,78px)!important;line-height:1.04!important;letter-spacing:-.03em!important;
+    }
+    .offer-page .home-cta-copy{max-width:520px}
+    .offer-page .home-cta-copy p{margin:0 0 28px!important;color:var(--mk4-muted)!important;font-size:16px;line-height:1.8}
+    .offer-page .home-cta .button-light{color:#fff!important;background:var(--mk4-ink)!important}
+    .offer-page .home-cta .button-light:hover,.offer-page .home-cta .button-light:focus-visible{color:#fff!important;background:var(--mk4-gold-deep)!important}
+
+    @media(max-width:760px){
+      .site-nav a.social-nav-link{width:46px!important;height:46px!important;margin:16px 0 4px!important;border:0!important;border-bottom:0!important}
+      .site-nav a.social-nav-link svg{width:12px!important;height:21px!important}
+      .offer-page .section-top{margin-bottom:30px!important}
+      .offer-page .section-top .display-title{font-size:clamp(42px,12vw,56px)!important;line-height:1.06!important}
+      .offer-page .service-grid{gap:16px!important}
+      .offer-page .service-card,
+      .offer-page .service-card:nth-child(2),
+      .offer-page .service-card:nth-child(3){min-height:0!important;padding:24px!important}
+      .offer-page .service-card h3{margin:36px 0 14px!important;font-size:40px!important}
+      .offer-page .service-card p{font-size:14px!important;line-height:1.7!important}
+      .offer-page .service-card a{margin-top:26px!important;padding-top:20px!important;font-size:13px!important}
+      .offer-page .service-arrow{width:32px;height:32px;flex-basis:32px}
+      .offer-page .service-detail{padding:76px 0!important}
+      .offer-page .home-cta{padding:72px 0!important}
+      .offer-page .home-cta-grid{grid-template-columns:1fr!important;gap:28px!important}
+      .offer-page .home-cta h2{font-size:clamp(44px,12vw,58px)!important;line-height:1.06!important}
+      .offer-page .home-cta-copy p{margin-bottom:24px!important;font-size:15px;line-height:1.75}
+      .offer-page .home-cta .button{width:100%;max-width:340px}
+    }
   </style>
-  <script defer src="site.js?v=5"></script>
+  <script defer src="site.js?v=6"></script>
 </head>
 <body data-page="oferta">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
@@ -35,13 +98,67 @@
   </header>
 
   <main id="main-content" class="offer-page">
-    <section class="inner-hero"><div class="container inner-hero-grid"><div><p class="eyebrow">Oferta</p><h1>Mebel zaczyna się<br /><em>od potrzeby.</em></h1></div><p class="inner-hero-intro">Nie pracujemy z jednym katalogiem. Ustalamy wymiar, funkcję, komfort i materiał pod konkretną przestrzeń.</p></div></section>
+    <section class="inner-hero">
+      <div class="container inner-hero-grid">
+        <div><p class="eyebrow">Oferta</p><h1>Meble tapicerowane<br /><em>na zamówienie.</em></h1></div>
+        <p class="inner-hero-intro">Wykonujemy meble do domu, restauracji, hoteli i innych przestrzeni. Zajmujemy się także renowacją oraz wymianą tapicerki.</p>
+      </div>
+    </section>
 
-    <section class="section cream"><div class="container"><div class="section-top reveal"><div><div class="section-label">Zakres prac</div><h2 class="display-title">Trzy kierunki.<br /><em>Jedno podejście.</em></h2></div><p>Każdy projekt omawiamy indywidualnie — od wymiaru i proporcji po tkaninę, przeszycia i sposób użytkowania.</p></div><div class="service-grid"><article class="service-card reveal" id="dom"><span class="service-index">01</span><span class="service-icon">⌂</span><h3>Do domu</h3><p>Kanapy, narożniki, fotele, łóżka i inne elementy tapicerowane do salonu, sypialni oraz strefy wypoczynku.</p><a href="kontakt.html">Zapytaj o mebel <span>↗</span></a></article><article class="service-card reveal reveal-delay-1" id="biznes"><span class="service-index">02</span><span class="service-icon">✦</span><h3>Dla biznesu</h3><p>Meble i siedziska do restauracji, hoteli oraz innych przestrzeni komercyjnych — jednostkowo lub w większym zakresie.</p><a href="kontakt.html">Omów zamówienie <span>↗</span></a></article><article class="service-card reveal reveal-delay-2" id="renowacja"><span class="service-index">03</span><span class="service-icon">◌</span><h3>Renowacja</h3><p>Nowa tapicerka, odświeżenie i personalizacja mebli, które warto zachować zamiast wymieniać.</p><a href="kontakt.html">Pokaż nam mebel <span>↗</span></a></article></div></div></section>
+    <section class="section cream">
+      <div class="container">
+        <div class="section-top reveal">
+          <div><div class="section-label">Zakres prac</div><h2 class="display-title">Co możemy dla Ciebie wykonać</h2></div>
+          <p>Każde zlecenie ustalamy indywidualnie — od wymiaru i przeznaczenia po tkaninę, komfort i sposób wykończenia.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card reveal" id="dom">
+            <span class="service-index">01</span>
+            <h3>Do domu</h3>
+            <p>Kanapy, narożniki, fotele, łóżka i inne elementy tapicerowane dopasowane wymiarem, materiałem i komfortem do wnętrza.</p>
+            <a href="kontakt.html">Zapytaj o realizację <span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span></a>
+          </article>
+          <article class="service-card reveal reveal-delay-1" id="biznes">
+            <span class="service-index">02</span>
+            <h3>Dla firm</h3>
+            <p>Siedziska, loże, kanapy i inne meble tapicerowane do restauracji, hoteli, biur oraz lokali usługowych.</p>
+            <a href="kontakt.html">Omów realizację <span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span></a>
+          </article>
+          <article class="service-card reveal reveal-delay-2" id="renowacja">
+            <span class="service-index">03</span>
+            <h3>Renowacja</h3>
+            <p>Wymiana tapicerki, odświeżenie wypełnień i poprawa wykończenia mebli, które warto zachować i dalej użytkować.</p>
+            <a href="kontakt.html">Zapytaj o renowację <span class="service-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span></a>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <section class="service-detail paper"><div class="container detail-grid"><aside class="detail-aside reveal"><div class="section-label">Przed wykonaniem</div><h2>Najpierw<br /><em>konkrety.</em></h2><p>Dobre ustalenia na początku oszczędzają przypadkowych decyzji później.</p></aside><div class="detail-list"><article class="detail-item reveal"><h3>Wymiary i proporcje</h3><p>Dopasowujemy mebel do pomieszczenia, przejść, wysokości i sposobu użytkowania.</p></article><article class="detail-item reveal reveal-delay-1"><h3>Materiał i kolor</h3><p>Dobieramy tkaninę pod wygląd, fakturę, wytrzymałość i warunki codziennego użytkowania.</p></article><article class="detail-item reveal reveal-delay-2"><h3>Komfort</h3><p>Głębokość siedziska, wysokość oparcia i sprężystość mają znaczenie równie duże jak wygląd.</p></article><article class="detail-item reveal reveal-delay-3"><h3>Wykończenie</h3><p>Przeszycia, krawędzie, nóżki i detale domykają projekt bez zbędnego ozdabiania.</p></article></div></div></section>
+    <section class="service-detail paper">
+      <div class="container detail-grid">
+        <aside class="detail-aside reveal">
+          <div class="section-label">Przed realizacją</div>
+          <h2>Ustalamy wszystko<br /><em>przed wykonaniem.</em></h2>
+          <p>Przed rozpoczęciem pracy ustalamy najważniejsze parametry, żeby gotowy mebel odpowiadał przestrzeni i sposobowi użytkowania.</p>
+        </aside>
+        <div class="detail-list">
+          <article class="detail-item reveal"><h3>Wymiary i proporcje</h3><p>Sprawdzamy szerokość, głębokość, wysokość oraz miejsce, w którym mebel będzie ustawiony.</p></article>
+          <article class="detail-item reveal reveal-delay-1"><h3>Materiał i kolor</h3><p>Dobieramy tkaninę do wyglądu wnętrza, intensywności użytkowania i oczekiwanego sposobu pielęgnacji.</p></article>
+          <article class="detail-item reveal reveal-delay-2"><h3>Komfort</h3><p>Ustalamy głębokość siedziska, wysokość oparcia i rodzaj wypełnienia odpowiedni do przeznaczenia mebla.</p></article>
+          <article class="detail-item reveal reveal-delay-3"><h3>Wykończenie</h3><p>Na końcu dopracowujemy przeszycia, krawędzie, nóżki i pozostałe detale widoczne w gotowym meblu.</p></article>
+        </div>
+      </div>
+    </section>
 
-    <section class="home-cta"><div class="container home-cta-grid reveal"><h2>Nietypowy projekt?<br /><em>Tym lepiej.</em></h2><div class="home-cta-copy"><p>Wyślij zdjęcie, wymiar albo opis. Zobaczymy, czy i jak możemy to wykonać.</p><a class="button button-light" href="kontakt.html">Porozmawiajmy <span>↗</span></a></div></div></section>
+    <section class="home-cta">
+      <div class="container home-cta-grid reveal">
+        <h2>Masz pomysł na mebel?</h2>
+        <div class="home-cta-copy">
+          <p>Wyślij zdjęcie lub krótki opis i orientacyjne wymiary. Na tej podstawie łatwiej będzie omówić zakres pracy oraz przygotować wycenę.</p>
+          <a class="button button-light" href="kontakt.html">Zapytaj o wycenę <span>↗</span></a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer"><div class="container footer-main"><a class="brand footer-brand" href="index.html"><img class="logo-symbol" src="assets/logo-light.svg" alt="" /><span class="brand-name">meble<em>krenc</em></span></a><p>Pracownia mebli tapicerowanych<br />Pałucka 5 · 62-105 Łekno · 663 378 388</p></div><div class="container footer-bottom"><span>© <span data-year></span> Meble Krenc s.c. Maria Krenc, Michał Krenc</span><span class="footer-legal"><a class="footer-social" href="https://www.facebook.com/MebleKrenc/" target="_blank" rel="noreferrer" aria-label="Facebook Meble Krenc"><svg viewBox="0 0 320 512" aria-hidden="true"><path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91V127.2c0-25.35 12.42-50.06 52.24-50.06H297V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="cookies.html">Cookies</a><a href="ustawienia-cookies.html" data-cookie-open>Ustawienia cookies</a></span></div></footer>
