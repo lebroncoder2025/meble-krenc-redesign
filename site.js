@@ -137,8 +137,9 @@ document.querySelectorAll('[data-cookie-open]').forEach((button) => {
 
 document.querySelectorAll('[data-cookie-save]').forEach((button) => {
   button.addEventListener('click', () => {
-    const checked = analyticsInputs.some((input) => input.checked);
-    saveConsent(checked);
+    const scope = button.closest('.cookie-panel') || document;
+    const analyticsInput = scope.querySelector('[data-cookie-analytics]');
+    saveConsent(Boolean(analyticsInput?.checked));
   });
 });
 
