@@ -10,7 +10,24 @@
   <link rel="stylesheet" href="site.css" />
   <link rel="stylesheet" href="site-v3.css" />
   <link rel="stylesheet" href="site-v4.css" />
-  <script defer src="site.js"></script>
+  <style>
+    .contact-form .form-heading{margin-bottom:34px!important}
+    .contact-form .form-heading h2{line-height:1.08!important}
+    .contact-form .form-heading span{max-width:250px;line-height:1.5!important;text-align:right}
+    .contact-form .form-help{margin:8px 0 26px!important;font-size:13px!important;line-height:1.75!important}
+    .contact-form .button{margin-top:0!important}
+    .contact-form .form-status:not(:empty){margin:20px 0 0!important;line-height:1.65!important}
+    .contact-form textarea{min-height:180px}
+    .contact-social a,.map-card{min-height:112px}
+    @media(max-width:760px){
+      .contact-form .form-heading{margin-bottom:28px!important}
+      .contact-form .form-heading span{text-align:left}
+      .contact-form .form-help{margin:10px 0 28px!important;font-size:13px!important;line-height:1.72!important}
+      .contact-form .button{width:100%!important}
+      .contact-social a,.map-card{min-height:0}
+    }
+  </style>
+  <script defer src="site.js?v=6"></script>
 </head>
 <body data-page="kontakt">
 <a class="skip-link" href="#main-content">Przejdź do treści</a>
@@ -36,17 +53,17 @@
 <main id="main-content">
   <section class="inner-hero">
     <div class="container inner-hero-grid">
-      <div><p class="eyebrow">Kontakt</p><h1>Powiedz,<br /><em>czego potrzebujesz.</em></h1></div>
-      <p class="inner-hero-intro">Nie musisz mieć gotowego projektu. Zdjęcie, wymiar albo kilka zdań wystarczą, żeby zacząć rozmowę.</p>
+      <div><p class="eyebrow">Kontakt</p><h1>Porozmawiajmy<br /><em>o Twoim meblu.</em></h1></div>
+      <p class="inner-hero-intro">Napisz, czego potrzebujesz, albo zadzwoń. Jeśli masz zdjęcie i orientacyjne wymiary, przygotuj je przed rozmową — ułatwią pierwszą wycenę.</p>
     </div>
   </section>
 
   <section class="section cream">
     <div class="container contact-layout">
       <div class="contact-info reveal">
-        <div class="section-label">Meble Krenc</div>
-        <h2>Najprościej:<br /><em>napisz lub zadzwoń.</em></h2>
-        <p>Jeśli masz zdjęcie mebla albo wnętrza, przygotuj je przed kontaktem. Pomoże nam szybciej zrozumieć zakres projektu.</p>
+        <div class="section-label">Kontakt bezpośredni</div>
+        <h2>Zadzwoń albo<br /><em>napisz wiadomość.</em></h2>
+        <p>Najważniejsze na początku są rodzaj mebla, orientacyjny wymiar i informacja, czy chodzi o nowy projekt, czy renowację.</p>
         <div class="contact-list">
           <div class="contact-item"><span>Telefon</span><a href="tel:+48663378388"><strong>663 378 388</strong></a></div>
           <div class="contact-item"><span>Adres pracowni</span><strong>Pałucka 5<br />62-105 Łekno</strong></div>
@@ -62,23 +79,23 @@
 
       <div class="reveal reveal-delay-1">
         <form class="contact-form" id="contact-form" data-endpoint="" novalidate>
-          <div class="form-heading"><h2>Wyślij zapytanie</h2><span>formularz przygotowany do bezpośredniej wysyłki</span></div>
+          <div class="form-heading"><h2>Zapytanie o wycenę</h2><span>Wypełnij podstawowe informacje o zleceniu</span></div>
           <label class="form-field">Imię<input type="text" name="name" autocomplete="name" placeholder="Jak masz na imię?" required /></label>
           <label class="form-field">E-mail<input type="email" name="email" autocomplete="email" placeholder="np. imie@adres.pl" required /></label>
           <label class="form-field">Telefon <span class="form-optional">opcjonalnie</span><input type="tel" name="phone" autocomplete="tel" placeholder="np. 663 000 000" /></label>
-          <label class="form-field">Wiadomość<textarea name="message" rows="6" placeholder="Napisz, czego potrzebujesz, podaj orientacyjne wymiary lub opisz mebel…" required></textarea></label>
-          <p class="form-help">Po podłączeniu obsługi formularza wiadomość będzie wysyłana bezpośrednio do Meble Krenc — bez kopiowania treści i bez dodatkowych kroków.</p>
+          <label class="form-field">Wiadomość<textarea name="message" rows="6" placeholder="Opisz mebel, podaj orientacyjne wymiary, liczbę sztuk lub zakres renowacji…" required></textarea></label>
+          <p class="form-help">Najbardziej pomagają: rodzaj mebla, orientacyjne wymiary, liczba sztuk oraz informacja, czy chodzi o nowy mebel, czy renowację.</p>
           <button class="button button-primary" type="submit">Wyślij zapytanie <span>↗</span></button>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
 
         <div class="contact-social">
           <a href="https://www.facebook.com/MebleKrenc/" target="_blank" rel="noreferrer">
-            <span>Profil MebleKrenc<small>Aktualne publikacje i kontakt przez Messenger</small></span><span>↗</span>
+            <span>Facebook MebleKrenc<small>Realizacje i kontakt przez Messenger</small></span><span>↗</span>
           </a>
         </div>
         <div class="map-card">
-          <div><strong>Łekno</strong><span>Pałucka 5 · 62-105 Łekno</span></div>
+          <div><strong>Pracownia w Łeknie</strong><span>Pałucka 5 · 62-105 Łekno</span></div>
           <a href="https://www.google.com/maps/search/?api=1&query=Pa%C5%82ucka+5%2C+62-105+%C5%81ekno" target="_blank" rel="noreferrer" aria-label="Otwórz lokalizację w Google Maps">↗</a>
         </div>
       </div>
@@ -87,8 +104,8 @@
 
   <section class="section paper">
     <div class="container section-top">
-      <div><div class="section-label">Przed kontaktem</div><h2 class="display-title">Zdjęcie i wymiar<br /><em>bardzo pomagają.</em></h2></div>
-      <p>Jeśli możesz, przygotuj zdjęcie przestrzeni lub mebla oraz orientacyjne wymiary. Dzięki temu pierwsza rozmowa od razu będzie konkretniejsza.</p>
+      <div><div class="section-label">Przed kontaktem</div><h2 class="display-title">Zdjęcie i wymiary<br /><em>ułatwiają wycenę.</em></h2></div>
+      <p>Nie potrzebujesz gotowego projektu. Wystarczy krótki opis, zdjęcie podobnego mebla lub wnętrza i orientacyjne wymiary.</p>
     </div>
   </section>
 </main>
