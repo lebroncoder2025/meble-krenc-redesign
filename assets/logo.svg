@@ -1,14 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 96" role="img" aria-labelledby="title desc">
-  <title id="title">Meble Krenc</title>
-  <desc id="desc">Monogram M K i logotyp Meble Krenc</desc>
-  <rect x="3" y="3" width="90" height="90" rx="27" fill="#181816"/>
-  <path d="M20 72V23l22 25 22-25v49" fill="none" stroke="#f6f2ea" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M62 23v49M62 47h7M69 47l17-24M69 47l17 25" fill="none" stroke="#c28a55" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="43" cy="48" r="3" fill="#c28a55"/>
-  <g font-family="Arial, Helvetica, sans-serif">
-    <text x="119" y="35" fill="#8d542f" font-size="13" font-weight="700" letter-spacing="4.8">MEBLE</text>
-    <text x="116" y="70" fill="#181816" font-size="30" font-weight="800" letter-spacing="1.5">KRENC</text>
-    <path d="M119 81h130" fill="none" stroke="#c28a55" stroke-width="2" stroke-linecap="round"/>
-    <text x="119" y="92" fill="#6f6a62" font-size="7.2" font-weight="700" letter-spacing="2.5">TAPICEROWANE · ŁEKNO</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 82" role="img" aria-labelledby="title desc">
+  <title id="title">Znak K — Meble Krenc</title>
+  <desc id="desc">Minimalistyczny znak inspirowany konstrukcją i szwem tapicerskim</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 13v56" stroke="#181816" stroke-width="8"/>
+    <path d="M22 41 65 13M22 41 66 69" stroke="#181816" stroke-width="8"/>
+    <path d="M56 14v54" stroke="#c28a55" stroke-width="3"/>
+    <path d="M20 41h11" stroke="#c28a55" stroke-width="3"/>
   </g>
 </svg>
