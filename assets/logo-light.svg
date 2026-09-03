@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 96" role="img" aria-labelledby="title desc">
+  <title id="title">Meble Krenc</title>
+  <desc id="desc">Monogram M K i logotyp Meble Krenc</desc>
+  <rect x="3" y="3" width="90" height="90" rx="27" fill="#f6f2ea"/>
+  <path d="M20 72V23l22 25 22-25v49" fill="none" stroke="#181816" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M62 23v49M62 47h7M69 47l17-24M69 47l17 25" fill="none" stroke="#a96e3e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="43" cy="48" r="3" fill="#a96e3e"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="119" y="35" fill="#e0ad78" font-size="13" font-weight="700" letter-spacing="4.8">MEBLE</text>
+    <text x="116" y="70" fill="#f6f2ea" font-size="30" font-weight="800" letter-spacing="1.5">KRENC</text>
+    <path d="M119 81h130" fill="none" stroke="#c28a55" stroke-width="2" stroke-linecap="round"/>
+    <text x="119" y="92" fill="#b6afa4" font-size="7.2" font-weight="700" letter-spacing="2.5">TAPICEROWANE · ŁEKNO</text>
+  </g>
+</svg>

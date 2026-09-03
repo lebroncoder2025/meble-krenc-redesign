@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-label="Meble Krenc"><rect width="72" height="72" rx="18" fill="#F7F3EC"/><rect x="12" y="10" width="7" height="52" rx="3.5" fill="#C7905C"/><path d="M25 10h9v21L51 10h12L42 35l22 27H52L34 40v22h-9V10Z" fill="#181816"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+  <title id="title">MK — Meble Krenc</title>
+  <rect width="96" height="96" rx="28" fill="#181816"/>
+  <path d="M18 73V23l22 25 22-25v50" fill="none" stroke="#f6f2ea" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M62 23v50M62 47h7M69 47l17-24M69 47l17 26" fill="none" stroke="#c28a55" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="40" cy="48" r="3" fill="#c28a55"/>
+</svg>

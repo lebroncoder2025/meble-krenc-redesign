@@ -5,11 +5,11 @@ const siteNav = document.querySelector('.site-nav');
 const menuLabel = menuToggle?.querySelector('.sr-only');
 const FACEBOOK_URL = 'https://www.facebook.com/MebleKrenc/';
 
-/* Load the shared visual fixes on every page. Homepage already includes it in <head>. */
-if (!document.querySelector('link[href="site-v2.css"]')) {
+/* Load the final shared visual system on pages that do not declare it in <head>. */
+if (!document.querySelector('link[href="site-v3.css"]')) {
   const visualSystem = document.createElement('link');
   visualSystem.rel = 'stylesheet';
-  visualSystem.href = 'site-v2.css';
+  visualSystem.href = 'site-v3.css';
   document.head.appendChild(visualSystem);
 }
 
