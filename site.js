@@ -5,14 +5,29 @@ const siteNav = document.querySelector('.site-nav');
 const menuLabel = menuToggle?.querySelector('.sr-only');
 const FACEBOOK_URL = 'https://www.facebook.com/MebleKrenc/';
 
-/* Keep the company social profile visible on every page without duplicating markup. */
+/* Load the shared visual fixes on every page. Homepage already includes it in <head>. */
+if (!document.querySelector('link[href="site-v2.css"]')) {
+  const visualSystem = document.createElement('link');
+  visualSystem.rel = 'stylesheet';
+  visualSystem.href = 'site-v2.css';
+  document.head.appendChild(visualSystem);
+}
+
+/* Use the dedicated mark as favicon everywhere. */
+const favicon = document.querySelector('link[rel="icon"]') || document.createElement('link');
+favicon.rel = 'icon';
+favicon.type = 'image/svg+xml';
+favicon.href = 'assets/favicon.svg';
+if (!favicon.parentNode) document.head.appendChild(favicon);
+
+/* Keep the real company social profile visible on every page. */
 if (siteNav && !siteNav.querySelector('.social-nav-link')) {
   const socialLink = document.createElement('a');
   socialLink.className = 'social-nav-link';
   socialLink.href = FACEBOOK_URL;
   socialLink.target = '_blank';
   socialLink.rel = 'noreferrer';
-  socialLink.innerHTML = 'Facebook <span aria-hidden="true">↗</span>';
+  socialLink.innerHTML = '<span class="fb-dot" aria-hidden="true">f</span> Facebook';
   const cta = siteNav.querySelector('.nav-pill');
   siteNav.insertBefore(socialLink, cta || null);
 }
