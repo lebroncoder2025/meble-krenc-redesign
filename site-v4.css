@@ -1,0 +1,187 @@
+/* Meble Krenc — polish pass v4
+   Final overrides focused on spacing, contrast, mobile safety and brand consistency. */
+
+:root {
+  --mk4-ink: #181816;
+  --mk4-ink-soft: #272621;
+  --mk4-cream: #f7f3ec;
+  --mk4-cream-2: #eee7dc;
+  --mk4-card: #fffdf9;
+  --mk4-gold: #c59a5c;
+  --mk4-gold-deep: #94652f;
+  --mk4-muted: #6f6a62;
+  --mk4-line: rgba(24,24,22,.13);
+  --mk4-radius: 18px;
+  --mk4-radius-lg: 28px;
+}
+html { overflow-x: hidden; }
+body { overflow-x: hidden; }
+h1, h2, h3, .display-title { text-wrap: balance; overflow-wrap: normal; }
+p { text-wrap: pretty; }
+.container { width: min(1240px, calc(100% - 64px)); }
+
+/* Brand */
+.brand { display: inline-flex !important; align-items: center !important; gap: 14px !important; min-width: 0 !important; }
+.logo-symbol,
+.page-home .logo-symbol,
+.page-home .site-header:not(.is-scrolled) .logo-symbol {
+  width: 70px !important; height: 44px !important; max-height: 44px !important;
+  flex: 0 0 70px !important; object-fit: contain !important; object-position: center !important; filter: none !important;
+}
+.brand .brand-name {
+  display: inline-flex !important; flex-direction: row !important; align-items: baseline !important;
+  gap: .42em !important; color: var(--mk4-ink) !important; font-family: var(--mk-body, "Manrope", sans-serif) !important;
+  font-size: 14px !important; line-height: 1 !important; font-weight: 800 !important;
+  letter-spacing: .16em !important; text-transform: uppercase !important;
+}
+.brand .brand-name::before { display: none !important; content: none !important; }
+.brand .brand-name em { color: inherit !important; font-size: inherit !important; font-style: normal !important; font-weight: inherit !important; letter-spacing: inherit !important; }
+
+/* Navigation / icons */
+.site-nav { gap: 18px !important; }
+.social-nav-link {
+  width: 40px !important; height: 40px !important; display: inline-grid !important; place-items: center !important;
+  flex: 0 0 40px !important; padding: 0 !important; border: 1px solid var(--mk4-line) !important;
+  border-radius: 50% !important; font-size: 0 !important; opacity: 1 !important;
+}
+.social-nav-link:hover, .social-nav-link:focus-visible {
+  color: var(--mk4-card) !important; background: var(--mk4-ink) !important; border-color: var(--mk4-ink) !important;
+}
+.social-nav-link svg, .footer-social svg, .mk5-fb svg { width: 17px; height: 17px; display: block; }
+.icon-svg {
+  width: 17px; height: 17px; display: inline-block; flex: 0 0 auto;
+  stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Buttons */
+.button, .mk5-btn, .nav-pill, .cookie-actions button, .cookie-actions a, .cookie-panel-actions button {
+  border-radius: var(--mk4-radius) !important;
+}
+.button, .mk5-btn, .nav-pill { min-height: 50px !important; padding: 13px 19px !important; }
+.button span, .mk5-btn span, .nav-pill span, .text-link span { display: inline-grid; place-items: center; line-height: 0; }
+
+/* Spacing / typography */
+.eyebrow, .section-label, .mk5-eyebrow { margin-bottom: 18px !important; }
+.inner-hero h1, .legal-aside h1, .about-copy h2, .contact-info h2, .values h2,
+.detail-aside h2, .portfolio-feature-copy h2, .portfolio-social h2, .display-title,
+.page-home .mk5-title, .page-home .mk5-hero h1, .page-home .mk5-social-box h2, .page-home .mk5-cta-copy h2 {
+  line-height: 1.04 !important; letter-spacing: -.03em !important;
+}
+.inner-hero h1 em, .about-copy h2 em, .contact-info h2 em, .values h2 em, .display-title em { padding-bottom: .04em; }
+.inner-hero { padding: 124px 0 82px !important; }
+.inner-hero-grid { gap: clamp(40px, 7vw, 92px) !important; align-items: end !important; }
+.inner-hero-intro { max-width: 540px !important; margin: 0 !important; font-size: 16px !important; line-height: 1.85 !important; }
+.inner-hero-meta { margin-top: 48px !important; }
+.about-copy h2, .contact-info h2, .values h2, .portfolio-feature-copy h2 { margin-bottom: 26px !important; }
+.about-copy p, .contact-info > p, .portfolio-feature-copy p { margin-top: 0; margin-bottom: 18px; line-height: 1.85 !important; }
+.section { padding-block: 104px !important; }
+
+/* Explicit contrast surfaces */
+.cream, .paper, .legal-page { color: var(--mk4-ink) !important; }
+.dark, .values, .portfolio-social { color: #fffdf9 !important; background: var(--mk4-ink) !important; }
+.values h2, .values strong, .portfolio-social h2, .portfolio-social strong { color: #fffdf9 !important; }
+.values p, .portfolio-social p { color: rgba(255,253,249,.70) !important; }
+.contact-social { overflow: hidden; color: #fffdf9 !important; background: var(--mk4-ink) !important; border-radius: 20px !important; }
+.contact-social a, .contact-social a span, .contact-social a small { color: inherit !important; }
+.map-card a { display: grid !important; place-items: center !important; }
+
+/* Home */
+.page-home .mk5-hero h1 { line-height: 1.01 !important; letter-spacing: -.03em !important; }
+.page-home .mk5-lead { margin-top: 28px !important; line-height: 1.8 !important; }
+.page-home .mk5-actions { margin-top: 32px !important; gap: 14px !important; }
+.page-home .mk5-title { line-height: 1.05 !important; }
+.page-home .mk5-copy { line-height: 1.85 !important; }
+.page-home .mk5-card, .page-home .mk5-shot, .page-home .mk5-step, .page-home .mk5-why-item,
+.page-home .mk5-social-box, .page-home .mk5-cta-box { border-radius: var(--mk4-radius-lg) !important; }
+.page-home .mk5-fb {
+  width: 44px !important; height: 44px !important; display: grid !important; place-items: center !important;
+  padding: 0 !important; border-radius: 50% !important; font-size: 0 !important;
+}
+.page-home .mk5-social-box { gap: 64px !important; }
+.page-home .mk5-social-box p { line-height: 1.75 !important; }
+
+/* Footer */
+.footer-to-top { display: none !important; }
+.site-footer .footer-main { grid-template-columns: minmax(220px, .9fr) 1.2fr !important; gap: 54px !important; }
+.site-footer .footer-main > p { justify-self: end; }
+.site-footer .brand-name, .site-footer .brand-name em { color: #fffdf9 !important; }
+.footer-social {
+  width: 38px; height: 38px; display: inline-grid !important; place-items: center;
+  border: 1px solid rgba(255,255,255,.18); border-radius: 50%; font-size: 0 !important;
+}
+.footer-social:hover { background: rgba(255,255,255,.08); }
+
+/* Cookie UI */
+.cookie-option:has([data-cookie-analytics]) { display: none !important; }
+.cookie-actions [data-cookie-necessary] { display: none !important; }
+
+/* Forms */
+.contact-form { gap: 22px !important; }
+.form-heading { margin-bottom: 6px !important; }
+.form-heading h2 { line-height: 1.08 !important; }
+.form-field { gap: 8px !important; }
+.form-field input, .form-field textarea { line-height: 1.45 !important; }
+.form-help { margin: 0 !important; line-height: 1.7 !important; }
+
+/* Legal pages */
+.legal-layout { gap: clamp(48px, 8vw, 110px) !important; }
+.legal-content h2 { margin-top: 50px !important; margin-bottom: 14px !important; line-height: 1.18 !important; }
+.legal-content p, .legal-content li { line-height: 1.82 !important; }
+.legal-callout { padding: 28px !important; }
+
+@media (max-width: 760px) {
+  .container { width: min(100% - 32px, 1240px) !important; }
+  .nav-wrap { min-height: 72px !important; }
+  .logo-symbol, .page-home .logo-symbol { width: 58px !important; height: 38px !important; flex-basis: 58px !important; }
+  .brand .brand-name { font-size: 12px !important; letter-spacing: .11em !important; }
+  .site-nav .social-nav-link {
+    width: 44px !important; height: 44px !important; padding: 0 !important; border-bottom: 0 !important; margin: 14px 0 2px !important;
+  }
+  .section { padding-block: 76px !important; }
+  .inner-hero { padding: 92px 0 58px !important; }
+  .inner-hero-grid { gap: 26px !important; }
+  .inner-hero h1, .legal-aside h1 {
+    font-size: clamp(48px, 14vw, 66px) !important; line-height: 1.04 !important; letter-spacing: -.025em !important;
+  }
+  .inner-hero-intro { font-size: 14px !important; line-height: 1.75 !important; }
+  .inner-hero-meta { margin-top: 32px !important; }
+  .display-title, .about-copy h2, .contact-info h2, .values h2, .portfolio-feature-copy h2, .portfolio-social h2 {
+    font-size: clamp(42px, 12vw, 58px) !important; line-height: 1.06 !important;
+  }
+
+  .page-home .mk5-hero-shell { min-height: 0 !important; }
+  .page-home .mk5-hero-content { width: 100% !important; min-height: 0 !important; padding: 92px 0 48px !important; }
+  .page-home .mk5-hero-bottom { position: relative !important; inset: auto !important; }
+  .page-home .mk5-hero h1 {
+    max-width: 520px !important; font-size: clamp(47px, 13.4vw, 64px) !important; line-height: 1.03 !important; letter-spacing: -.025em !important;
+  }
+  .page-home .mk5-lead { margin-top: 22px !important; font-size: 14px !important; line-height: 1.72 !important; }
+  .page-home .mk5-actions { flex-direction: column !important; align-items: stretch !important; max-width: 330px !important; margin-top: 26px !important; }
+  .page-home .mk5-btn { width: 100% !important; }
+  .page-home .mk5-fb { top: 16px !important; right: 16px !important; }
+  .page-home .mk5-section { padding-block: 78px !important; }
+  .page-home .mk5-title { font-size: clamp(40px, 11.6vw, 56px) !important; line-height: 1.06 !important; }
+  .page-home .mk5-intro-grid, .page-home .mk5-showcase-grid, .page-home .mk5-why-grid { gap: 38px !important; }
+  .page-home .mk5-card { min-height: 310px !important; }
+  .page-home .mk5-gallery { grid-template-rows: 240px 150px 150px !important; }
+  .page-home .mk5-step h3 { margin-top: 30px !important; }
+  .page-home .mk5-social-box { gap: 28px !important; padding: 30px 24px !important; }
+  .page-home .mk5-social-box h2 { line-height: 1.06 !important; }
+  .page-home .mk5-cta-copy { padding: 38px 24px !important; }
+
+  .contact-form { gap: 18px !important; }
+  .contact-form .button { width: 100%; }
+  .contact-social a { gap: 16px !important; }
+  .legal-page { padding: 88px 0 68px !important; }
+  .legal-layout { gap: 30px !important; }
+  .legal-content h2 { margin-top: 38px !important; font-size: 29px !important; }
+
+  .site-footer .footer-main { grid-template-columns: 1fr !important; gap: 24px !important; padding: 48px 0 30px !important; }
+  .site-footer .footer-main > p { justify-self: start; margin: 0 !important; }
+  .footer-bottom { gap: 18px !important; }
+  .footer-legal { align-items: center; }
+}
+@media (max-width: 390px) {
+  .brand .brand-name { font-size: 11px !important; }
+  .page-home .mk5-hero h1 { font-size: 45px !important; }
+}
