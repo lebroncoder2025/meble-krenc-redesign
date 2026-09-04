@@ -10,18 +10,20 @@
     ['0%', '100%'], ['100%', '100%']
   ];
 
-  fetch('assets/gallery-sprite-final.txt?v=2', { cache: 'force-cache' })
+  fetch('assets/gallery-sprite-final.txt?v=3', { cache: 'reload' })
     .then((response) => {
       if (!response.ok) throw new Error('Nie udało się wczytać galerii');
       return response.text();
     })
     .then((data) => {
-      const imageUrl = `data:image/webp;base64,${data.trim()}`;
+      const encoded = data.replace(/\s+/g, '');
+      const imageUrl = `data:image/webp;base64,${encoded}`;
       slots.forEach((slot, index) => {
         const imageIndex = Number(slot.dataset.realization || index + 1) - 1;
         const position = positions[imageIndex] || positions[0];
         slot.style.backgroundImage = `url("${imageUrl}")`;
         slot.style.backgroundPosition = `${position[0]} ${position[1]}`;
+        slot.classList.remove('is-error');
         slot.classList.add('is-loaded');
       });
     })
