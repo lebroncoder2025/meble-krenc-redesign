@@ -109,21 +109,84 @@ document.querySelectorAll('.reveal').forEach((el) => observer ? observer.observe
 document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
 const privacyKey = 'mk_privacy_choice';
-const banner = document.querySelector('#cookie-banner');
-const modal = document.querySelector('#cookie-modal');
-const readPreference = () => document.cookie.split('; ').some((item) => item.startsWith(`${privacyKey}=`));
-const savePreference = () => {
-  document.cookie = `${privacyKey}=ok; max-age=15552000; path=/; SameSite=Lax`;
-  if (banner) banner.hidden = true;
-  if (modal) modal.hidden = true;
+const getCookieValue = (name) => {
+  const row = document.cookie.split('; ').find((item) => item.startsWith(`${name}=`));
+  return row ? decodeURIComponent(row.split('=').slice(1).join('=')) : '';
 };
-if (!readPreference() && banner) banner.hidden = false;
-document.querySelectorAll('[data-cookie-accept], [data-cookie-save]').forEach((button) => button.addEventListener('click', savePreference));
+const readPrivacy = () => {
+  const raw = getCookieValue(privacyKey);
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch { return raw === 'ok' ? { external: false } : null; }
+};
+const writePrivacy = (choice) => {
+  document.cookie = `${privacyKey}=${encodeURIComponent(JSON.stringify(choice))}; max-age=15552000; path=/; SameSite=Lax`;
+};
+
+let banner = document.querySelector('#cookie-banner');
+let modal = document.querySelector('#cookie-modal');
+
+if (!banner) {
+  banner = document.createElement('div');
+  banner.className = 'cookie-banner';
+  banner.id = 'cookie-banner';
+  banner.hidden = true;
+  banner.innerHTML = `<div class="cookie-copy"><strong>Prywatność</strong><p>Możesz wybrać, czy wczytywać treści zewnętrzne, takie jak mapa.</p></div><div class="cookie-actions"><button class="cookie-settings" type="button" data-cookie-open>Ustawienia</button><button class="cookie-accept" type="button" data-cookie-accept>Akceptuj wszystko</button></div>`;
+  body.appendChild(banner);
+} else {
+  const actions = banner.querySelector('.cookie-actions');
+  if (actions) actions.innerHTML = `<button class="cookie-settings" type="button" data-cookie-open>Ustawienia</button><button class="cookie-accept" type="button" data-cookie-accept>Akceptuj wszystko</button>`;
+  const copy = banner.querySelector('.cookie-copy p');
+  if (copy) copy.textContent = 'Możesz wybrać, czy wczytywać treści zewnętrzne, takie jak mapa.';
+}
+
+if (!modal) {
+  modal = document.createElement('div');
+  modal.className = 'cookie-modal';
+  modal.id = 'cookie-modal';
+  modal.hidden = true;
+  body.appendChild(modal);
+}
+modal.innerHTML = `<div class="cookie-panel" role="dialog" aria-modal="true" aria-labelledby="cookie-title"><div class="cookie-panel-head"><div><span class="cookie-kicker">Prywatność</span><h2 id="cookie-title">Ustawienia cookies</h2></div><button class="cookie-close-x" type="button" data-cookie-close aria-label="Zamknij">×</button></div><div class="cookie-options"><label class="cookie-option"><span><strong>Niezbędne</strong><small>Zapamiętanie ustawień strony</small></span><input type="checkbox" checked disabled /></label><label class="cookie-option"><span><strong>Treści zewnętrzne</strong><small>Google Maps na stronie kontaktu</small></span><input type="checkbox" data-cookie-external /></label></div><div class="cookie-panel-actions"><button class="button button-outline" type="button" data-cookie-essential>Tylko niezbędne</button><button class="button button-primary" type="button" data-cookie-save>Zapisz ustawienia</button></div></div>`;
+
+const externalToggle = modal.querySelector('[data-cookie-external]');
+const syncMapConsent = () => {
+  const choice = readPrivacy();
+  const allowed = Boolean(choice?.external);
+  document.querySelectorAll('[data-cookie-map-src]').forEach((frame) => {
+    const src = frame.dataset.cookieMapSrc;
+    if (allowed) {
+      if (frame.getAttribute('src') !== src) frame.setAttribute('src', src);
+      frame.closest('.map-embed-wrap')?.classList.add('is-loaded');
+    } else {
+      frame.removeAttribute('src');
+      frame.closest('.map-embed-wrap')?.classList.remove('is-loaded');
+    }
+  });
+};
+const savePrivacy = (external) => {
+  writePrivacy({ external: Boolean(external) });
+  banner.hidden = true;
+  modal.hidden = true;
+  syncMapConsent();
+};
+const openPrivacy = () => {
+  const choice = readPrivacy();
+  if (externalToggle) externalToggle.checked = Boolean(choice?.external);
+  modal.hidden = false;
+};
+
+if (!readPrivacy()) banner.hidden = false;
+syncMapConsent();
+
 document.querySelectorAll('[data-cookie-open]').forEach((button) => button.addEventListener('click', (event) => {
   event.preventDefault();
-  if (modal) modal.hidden = false;
+  openPrivacy();
 }));
-document.querySelectorAll('[data-cookie-close]').forEach((button) => button.addEventListener('click', () => { if (modal) modal.hidden = true; }));
+document.querySelectorAll('[data-cookie-close]').forEach((button) => button.addEventListener('click', () => { modal.hidden = true; }));
+document.querySelectorAll('[data-cookie-accept]').forEach((button) => button.addEventListener('click', () => savePrivacy(true)));
+document.querySelectorAll('[data-cookie-essential]').forEach((button) => button.addEventListener('click', () => savePrivacy(false)));
+document.querySelectorAll('[data-cookie-save]').forEach((button) => button.addEventListener('click', () => savePrivacy(Boolean(externalToggle?.checked))));
+document.querySelectorAll('[data-enable-map]').forEach((button) => button.addEventListener('click', () => savePrivacy(true)));
 
 const contactForm = document.querySelector('#contact-form');
 const formStatus = document.querySelector('#form-status');
@@ -159,8 +222,11 @@ contactForm?.addEventListener('submit', async (event) => {
 });
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') {
-    setMenu(false);
-    menuToggle.focus();
+  if (event.key === 'Escape') {
+    if (menuToggle?.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      menuToggle.focus();
+    }
+    if (modal && !modal.hidden) modal.hidden = true;
   }
 });
