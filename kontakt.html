@@ -18,16 +18,25 @@
     .contact-form .button{margin-top:0!important}
     .contact-form .form-status:not(:empty){margin:20px 0 0!important;line-height:1.65!important}
     .contact-form textarea{min-height:180px}
-    .contact-social a,.map-card{min-height:112px}
+    .contact-social a{min-height:112px}
+    .map-embed-wrap{position:relative;margin-top:18px;overflow:hidden;border:1px solid var(--mk4-line);border-radius:24px;background:#ebe5da;min-height:360px}
+    .map-embed-wrap iframe{display:block;width:100%;height:360px;border:0;background:#ebe5da}
+    .map-consent{position:absolute;inset:0;display:grid;place-items:center;padding:28px;text-align:center;background:linear-gradient(135deg,#eee7dc,#e5ddd0)}
+    .map-consent-inner{max-width:330px}
+    .map-consent strong{display:block;margin-bottom:10px;font-family:"Playfair Display",Georgia,serif;font-size:30px;line-height:1.05}
+    .map-consent p{margin:0 0 20px;color:var(--mk4-muted);font-size:13px;line-height:1.65}
+    .map-embed-wrap.is-loaded .map-consent{display:none}
     @media(max-width:760px){
       .contact-form .form-heading{margin-bottom:28px!important}
       .contact-form .form-heading span{text-align:left}
       .contact-form .form-help{margin:10px 0 28px!important;font-size:13px!important;line-height:1.72!important}
       .contact-form .button{width:100%!important}
-      .contact-social a,.map-card{min-height:0}
+      .contact-social a{min-height:0}
+      .map-embed-wrap,.map-embed-wrap iframe{min-height:320px;height:320px}
+      .map-consent strong{font-size:26px}
     }
   </style>
-  <script defer src="site.js?v=6"></script>
+  <script defer src="site.js?v=9"></script>
 </head>
 <body data-page="kontakt">
 <a class="skip-link" href="#main-content">Przejdź do treści</a>
@@ -37,16 +46,15 @@
       <img class="logo-symbol" src="assets/logo.svg" alt="" />
       <span class="brand-name">meble<em>krenc</em></span>
     </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <span class="sr-only">Otwórz menu</span><span></span><span></span>
-    </button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="sr-only">Otwórz menu</span></button>
     <nav class="site-nav" id="site-nav" aria-label="Główna nawigacja">
+      <a href="index.html">Start</a>
       <a href="oferta.html">Oferta</a>
       <a href="o-nas.html">O nas</a>
       <a href="realizacje.html">Realizacje</a>
       <a class="is-active" href="kontakt.html">Kontakt</a>
       <a class="social-nav-link" href="https://www.facebook.com/MebleKrenc/" target="_blank" rel="noreferrer" aria-label="Facebook Meble Krenc"></a>
-      <a class="nav-pill" href="kontakt.html">Zapytaj o wycenę <span>↗</span></a>
+      <a class="nav-pill" href="kontakt.html">Zapytaj o wycenę</a>
     </nav>
   </div>
 </header>
@@ -85,7 +93,7 @@
           <label class="form-field">Telefon <span class="form-optional">opcjonalnie</span><input type="tel" name="phone" autocomplete="tel" placeholder="np. 663 000 000" /></label>
           <label class="form-field">Wiadomość<textarea name="message" rows="6" placeholder="Opisz mebel, podaj orientacyjne wymiary, liczbę sztuk lub zakres renowacji…" required></textarea></label>
           <p class="form-help">Najbardziej pomagają: rodzaj mebla, orientacyjne wymiary, liczba sztuk oraz informacja, czy chodzi o nowy mebel, czy renowację.</p>
-          <button class="button button-primary" type="submit">Wyślij zapytanie <span>↗</span></button>
+          <button class="button button-primary" type="submit">Wyślij zapytanie</button>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
 
@@ -94,9 +102,10 @@
             <span>Facebook MebleKrenc<small>Realizacje i kontakt przez Messenger</small></span><span>↗</span>
           </a>
         </div>
-        <div class="map-card">
-          <div><strong>Pracownia w Łeknie</strong><span>Pałucka 5 · 62-105 Łekno</span></div>
-          <a href="https://www.google.com/maps/search/?api=1&query=Pa%C5%82ucka+5%2C+62-105+%C5%81ekno" target="_blank" rel="noreferrer" aria-label="Otwórz lokalizację w Google Maps">↗</a>
+
+        <div class="map-embed-wrap" aria-label="Mapa dojazdu do Meble Krenc">
+          <iframe title="Meble Krenc — Pałucka 5, Łekno" loading="lazy" referrerpolicy="no-referrer-when-downgrade" data-cookie-map-src="https://www.google.com/maps?q=Pa%C5%82ucka%205%2C%2062-105%20%C5%81ekno%2C%20Polska&output=embed"></iframe>
+          <div class="map-consent"><div class="map-consent-inner"><strong>Mapa dojazdu</strong><p>Mapa Google jest osadzona bezpośrednio na stronie. Włącz treści zewnętrzne, aby ją wyświetlić.</p><button class="button button-primary" type="button" data-enable-map>Wyświetl mapę</button></div></div>
         </div>
       </div>
     </div>
@@ -111,33 +120,15 @@
 </main>
 <footer class="site-footer">
   <div class="container footer-main">
-    <a class="brand footer-brand" href="index.html">
-      <img class="logo-symbol" src="assets/logo-light.svg" alt="" />
-      <span class="brand-name">meble<em>krenc</em></span>
-    </a>
+    <a class="brand footer-brand" href="index.html"><img class="logo-symbol" src="assets/logo-light.svg" alt="" /><span class="brand-name">meble<em>krenc</em></span></a>
     <p>Pracownia mebli tapicerowanych<br />Pałucka 5 · 62-105 Łekno · 663 378 388</p>
   </div>
   <div class="container footer-bottom">
     <span>© <span data-year></span> Meble Krenc s.c. Maria Krenc, Michał Krenc</span>
-    <span class="footer-legal">
-      <a class="footer-social" href="https://www.facebook.com/MebleKrenc/" target="_blank" rel="noreferrer" aria-label="Facebook Meble Krenc"></a>
-      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
-      <a href="cookies.html">Cookies</a>
-      <a href="ustawienia-cookies.html" data-cookie-open>Ustawienia cookies</a>
-    </span>
+    <span class="footer-legal"><a class="footer-social" href="https://www.facebook.com/MebleKrenc/" target="_blank" rel="noreferrer" aria-label="Facebook Meble Krenc"></a><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="cookies.html">Cookies</a><a href="ustawienia-cookies.html" data-cookie-open>Ustawienia cookies</a></span>
   </div>
 </footer>
-<div class="cookie-banner" id="cookie-banner" hidden>
-  <div class="cookie-copy"><strong>Prywatność</strong><p>Strona nie używa reklam ani analityki. Zapamiętujemy jedynie Twój wybór dotyczący tego komunikatu.</p></div>
-  <div class="cookie-actions"><button class="cookie-accept" type="button" data-cookie-accept>Rozumiem</button><a href="cookies.html">Więcej informacji</a></div>
-</div>
-<div class="cookie-modal" id="cookie-modal" hidden>
-  <div class="cookie-panel" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
-    <h2 id="cookie-title">Ustawienia prywatności</h2>
-    <p>Strona nie używa obecnie cookies analitycznych ani reklamowych.</p>
-    <label class="cookie-option"><span><strong>Niezbędne</strong><p>Zapamiętanie Twojego wyboru. Ta opcja jest zawsze aktywna.</p></span><input type="checkbox" checked disabled /></label>
-    <div class="cookie-panel-actions"><button class="button button-outline" type="button" data-cookie-close>Zamknij</button><button class="button button-primary" type="button" data-cookie-save>Zapisz</button></div>
-  </div>
-</div>
+<div class="cookie-banner" id="cookie-banner" hidden><div class="cookie-copy"><strong>Prywatność</strong><p></p></div><div class="cookie-actions"></div></div>
+<div class="cookie-modal" id="cookie-modal" hidden></div>
 </body>
 </html>
