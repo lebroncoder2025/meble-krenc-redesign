@@ -15,6 +15,20 @@ const ensureStylesheet = (href) => {
 ensureStylesheet('site-v3.css');
 ensureStylesheet('site-v4.css');
 
+/* Site-wide rules kept here as well so every page gets the same navigation/footer behavior,
+   even when an older page has a cached stylesheet URL. */
+const globalFixes = document.createElement('style');
+globalFixes.id = 'mk-sitewide-fixes';
+globalFixes.textContent = `
+.site-header{position:fixed!important;top:0!important;right:0!important;left:0!important;z-index:1000!important;transform:none!important;visibility:visible!important}
+.site-header.is-scrolled{box-shadow:0 8px 30px rgba(24,24,22,.08)!important}
+.footer-social{width:40px!important;height:40px!important;display:inline-grid!important;place-items:center!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:50%!important;background:transparent!important;color:rgba(255,255,255,.62)!important;box-shadow:none!important;font-size:0!important}
+.footer-social:hover{background:rgba(255,255,255,.06)!important;color:#fff!important;border-color:rgba(255,255,255,.38)!important}
+.footer-social svg{width:17px!important;height:17px!important;display:block!important;color:inherit!important;fill:currentColor!important}
+@media(max-width:760px){.site-header{position:fixed!important;top:0!important;right:0!important;left:0!important}.footer-social{background:transparent!important;color:rgba(255,255,255,.62)!important}}
+`;
+document.head.appendChild(globalFixes);
+
 const favicon = document.querySelector('link[rel="icon"]') || document.createElement('link');
 favicon.rel = 'icon';
 favicon.type = 'image/svg+xml';
