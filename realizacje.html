@@ -17,10 +17,9 @@
     .realizations-head p{max-width:440px;margin:0;color:var(--mk4-muted);font-size:14px;line-height:1.8}
     .realizations-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 18px}
     .realization-card{margin:0;min-width:0}
-    .realization-photo{position:relative;overflow:hidden;aspect-ratio:4/3;border-radius:24px;background:#ded8cf center/cover no-repeat;background-size:200% 500%;box-shadow:inset 0 0 0 1px rgba(24,24,22,.06)}
+    .realization-photo{position:relative;overflow:hidden;aspect-ratio:4/3;border-radius:24px;background:#ded8cf;box-shadow:inset 0 0 0 1px rgba(24,24,22,.06)}
+    .realization-photo img{width:100%;height:100%;display:block;object-fit:cover}
     .realization-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 68%,rgba(0,0,0,.08));pointer-events:none}
-    .realization-photo:not(.is-loaded)::before{content:"Ładowanie zdjęcia…";position:absolute;inset:0;display:grid;place-items:center;color:var(--mk4-muted);font-size:12px;letter-spacing:.04em}
-    .realization-photo.is-error::before{content:"Zdjęcie chwilowo niedostępne"}
     .realization-card figcaption{display:flex;justify-content:space-between;gap:20px;padding:13px 4px 0}
     .realization-card figcaption strong{font-size:15px;font-weight:750}
     .realization-card figcaption span{color:var(--mk4-muted);font-size:11px;text-transform:uppercase;letter-spacing:.12em}
@@ -35,7 +34,6 @@
     }
   </style>
   <script defer src="site.js?v=9"></script>
-  <script defer src="realizacje-gallery.js?v=3"></script>
 </head>
 <body data-page="realizacje">
 <a class="skip-link" href="#main-content">Przejdź do treści</a>
@@ -48,49 +46,23 @@
     </nav>
   </div>
 </header>
-
 <main id="main-content">
-  <section class="inner-hero portfolio-header">
-    <div class="container inner-hero-grid">
-      <div><p class="eyebrow">Realizacje</p><h1>Nasze<br /><em>wykonania.</em></h1></div>
-      <p class="inner-hero-intro">Prawdziwe realizacje Meble Krenc — od klasycznych sof i narożników po łóżka tapicerowane oraz zestawy wypoczynkowe wykonywane na zamówienie.</p>
-    </div>
-  </section>
-
-  <section class="realizations-section">
-    <div class="container">
-      <div class="realizations-head reveal">
-        <h2>Meble wykonane<br /><em>dla naszych klientów.</em></h2>
-        <p>Galeria pokazuje przekazane przez firmę zdjęcia wykonanych mebli. Różne formy, tkaniny i wykończenia — każdy projekt powstaje pod konkretne zamówienie.</p>
-      </div>
-      <div class="realizations-grid">
-        <figure class="realization-card reveal"><div class="realization-photo" data-realization="1" role="img" aria-label="Pikowana bordowa sofa Chesterfield"></div><figcaption><strong>Sofa pikowana</strong><span>Realizacja 01</span></figcaption></figure>
-        <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo" data-realization="2" role="img" aria-label="Szare łóżko tapicerowane z wysokim zagłówkiem"></div><figcaption><strong>Łóżko tapicerowane</strong><span>Realizacja 02</span></figcaption></figure>
-        <figure class="realization-card reveal"><div class="realization-photo" data-realization="3" role="img" aria-label="Brązowa nowoczesna sofa"></div><figcaption><strong>Sofa nowoczesna</strong><span>Realizacja 03</span></figcaption></figure>
-        <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo" data-realization="4" role="img" aria-label="Zielona sofa z poduszkami i ozdobnymi detalami"></div><figcaption><strong>Sofa klasyczna</strong><span>Realizacja 04</span></figcaption></figure>
-        <figure class="realization-card reveal"><div class="realization-photo" data-realization="5" role="img" aria-label="Jasnoszary narożnik tapicerowany"></div><figcaption><strong>Narożnik</strong><span>Realizacja 05</span></figcaption></figure>
-        <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo" data-realization="6" role="img" aria-label="Niebieskie łóżko tapicerowane z panelowym zagłówkiem"></div><figcaption><strong>Łóżko z zagłówkiem</strong><span>Realizacja 06</span></figcaption></figure>
-        <figure class="realization-card reveal"><div class="realization-photo" data-realization="7" role="img" aria-label="Dwie jasne sofy w salonie"></div><figcaption><strong>Zestaw wypoczynkowy</strong><span>Realizacja 07</span></figcaption></figure>
-        <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo" data-realization="8" role="img" aria-label="Granatowe łóżko z dekoracyjnym wysokim zagłówkiem"></div><figcaption><strong>Łóżko dekoracyjne</strong><span>Realizacja 08</span></figcaption></figure>
-        <figure class="realization-card reveal"><div class="realization-photo" data-realization="9" role="img" aria-label="Szary fotel, pufa i sofa w zestawie"></div><figcaption><strong>Fotel i sofa</strong><span>Realizacja 09</span></figcaption></figure>
-        <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo" data-realization="10" role="img" aria-label="Szary narożnik w nowoczesnym wnętrzu"></div><figcaption><strong>Narożnik nowoczesny</strong><span>Realizacja 10</span></figcaption></figure>
-      </div>
-    </div>
-  </section>
-
-  <section class="portfolio-social">
-    <div class="container portfolio-social-grid">
-      <div><div class="section-label">Kolejne realizacje</div><h2>Masz swój pomysł?</h2></div>
-      <div class="portfolio-social-copy"><p>Jeżeli podoba Ci się kierunek którejś realizacji, wyślij zdjęcie i orientacyjne wymiary. Ustalimy tkaninę, proporcje i szczegóły wykonania.</p><a class="button button-light" href="kontakt.html">Zapytaj o wycenę</a></div>
-    </div>
-  </section>
+  <section class="inner-hero portfolio-header"><div class="container inner-hero-grid"><div><p class="eyebrow">Realizacje</p><h1>Nasze<br /><em>wykonania.</em></h1></div><p class="inner-hero-intro">Prawdziwe realizacje Meble Krenc — od klasycznych sof i narożników po łóżka tapicerowane oraz zestawy wypoczynkowe wykonywane na zamówienie.</p></div></section>
+  <section class="realizations-section"><div class="container"><div class="realizations-head reveal"><h2>Meble wykonane<br /><em>dla naszych klientów.</em></h2><p>Galeria pokazuje przekazane przez firmę zdjęcia wykonanych mebli. Różne formy, tkaniny i wykończenia — każdy projekt powstaje pod konkretne zamówienie.</p></div><div class="realizations-grid">
+    <figure class="realization-card reveal"><div class="realization-photo"><img src="assets/realizacja-01.svg?v=5" alt="Pikowana bordowa sofa Chesterfield" loading="eager" /></div><figcaption><strong>Sofa pikowana</strong><span>Realizacja 01</span></figcaption></figure>
+    <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo"><img src="assets/realizacja-02.svg?v=5" alt="Szare łóżko tapicerowane z wysokim zagłówkiem" loading="eager" /></div><figcaption><strong>Łóżko tapicerowane</strong><span>Realizacja 02</span></figcaption></figure>
+    <figure class="realization-card reveal"><div class="realization-photo"><img src="assets/realizacja-03.svg?v=5" alt="Brązowa nowoczesna sofa" loading="lazy" /></div><figcaption><strong>Sofa nowoczesna</strong><span>Realizacja 03</span></figcaption></figure>
+    <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo"><img src="assets/realizacja-04.svg?v=5" alt="Zielona sofa z poduszkami i ozdobnymi detalami" loading="lazy" /></div><figcaption><strong>Sofa klasyczna</strong><span>Realizacja 04</span></figcaption></figure>
+    <figure class="realization-card reveal"><div class="realization-photo"><img src="assets/realizacja-05.svg?v=5" alt="Jasnoszary narożnik tapicerowany" loading="lazy" /></div><figcaption><strong>Narożnik</strong><span>Realizacja 05</span></figcaption></figure>
+    <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo"><img src="assets/realizacja-06.svg?v=5" alt="Niebieskie łóżko tapicerowane z panelowym zagłówkiem" loading="lazy" /></div><figcaption><strong>Łóżko z zagłówkiem</strong><span>Realizacja 06</span></figcaption></figure>
+    <figure class="realization-card reveal"><div class="realization-photo"><img src="assets/realizacja-07.svg?v=5" alt="Dwie jasne sofy w salonie" loading="lazy" /></div><figcaption><strong>Zestaw wypoczynkowy</strong><span>Realizacja 07</span></figcaption></figure>
+    <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo"><img src="assets/realizacja-08.svg?v=5" alt="Granatowe łóżko z dekoracyjnym wysokim zagłówkiem" loading="lazy" /></div><figcaption><strong>Łóżko dekoracyjne</strong><span>Realizacja 08</span></figcaption></figure>
+    <figure class="realization-card reveal"><div class="realization-photo"><img src="assets/realizacja-09.svg?v=5" alt="Szary fotel, pufa i sofa w zestawie" loading="lazy" /></div><figcaption><strong>Fotel i sofa</strong><span>Realizacja 09</span></figcaption></figure>
+    <figure class="realization-card reveal reveal-delay-1"><div class="realization-photo"><img src="assets/realizacja-10.svg?v=5" alt="Szary narożnik w nowoczesnym wnętrzu" loading="lazy" /></div><figcaption><strong>Narożnik nowoczesny</strong><span>Realizacja 10</span></figcaption></figure>
+  </div></div></section>
+  <section class="portfolio-social"><div class="container portfolio-social-grid"><div><div class="section-label">Kolejne realizacje</div><h2>Masz swój pomysł?</h2></div><div class="portfolio-social-copy"><p>Jeżeli podoba Ci się kierunek którejś realizacji, wyślij zdjęcie i orientacyjne wymiary. Ustalimy tkaninę, proporcje i szczegóły wykonania.</p><a class="button button-light" href="kontakt.html">Zapytaj o wycenę</a></div></div></section>
 </main>
-
-<footer class="site-footer">
-  <div class="container footer-main"><a class="brand footer-brand" href="index.html"><img class="logo-symbol" src="assets/logo-light.svg" alt="" /><span class="brand-name">meble<em>krenc</em></span></a><p>Pracownia mebli tapicerowanych<br />Pałucka 5 · 62-105 Łekno · 663 378 388</p></div>
-  <div class="container footer-bottom"><span>© <span data-year></span> Meble Krenc s.c. Maria Krenc, Michał Krenc</span><span class="footer-legal"><a class="footer-social" href="https://www.facebook.com/MebleKrenc/" target="_blank" rel="noreferrer" aria-label="Facebook Meble Krenc"></a><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="cookies.html">Cookies</a><a href="ustawienia-cookies.html" data-cookie-open>Ustawienia cookies</a></span></div>
-</footer>
-<div class="cookie-banner" id="cookie-banner" hidden><div class="cookie-copy"><strong>Prywatność</strong><p></p></div><div class="cookie-actions"></div></div>
-<div class="cookie-modal" id="cookie-modal" hidden></div>
+<footer class="site-footer"><div class="container footer-main"><a class="brand footer-brand" href="index.html"><img class="logo-symbol" src="assets/logo-light.svg" alt="" /><span class="brand-name">meble<em>krenc</em></span></a><p>Pracownia mebli tapicerowanych<br />Pałucka 5 · 62-105 Łekno · 663 378 388</p></div><div class="container footer-bottom"><span>© <span data-year></span> Meble Krenc s.c. Maria Krenc, Michał Krenc</span><span class="footer-legal"><a class="footer-social" href="https://www.facebook.com/MebleKrenc/" target="_blank" rel="noreferrer" aria-label="Facebook Meble Krenc"></a><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="cookies.html">Cookies</a><a href="ustawienia-cookies.html" data-cookie-open>Ustawienia cookies</a></span></div></footer>
+<div class="cookie-banner" id="cookie-banner" hidden><div class="cookie-copy"><strong>Prywatność</strong><p></p></div><div class="cookie-actions"></div></div><div class="cookie-modal" id="cookie-modal" hidden></div>
 </body>
 </html>
